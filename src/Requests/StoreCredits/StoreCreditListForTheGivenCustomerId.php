@@ -35,4 +35,10 @@ class StoreCreditListForTheGivenCustomerId extends Request
 	{
 		return array_filter(['includes[]' => $this->includes]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

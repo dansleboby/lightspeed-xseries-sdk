@@ -21,10 +21,12 @@ class ListSales extends Request
 
 
 	/**
+	 * @param null|string $after (int64) The lower limit for the version numbers to be included in the response.
 	 * @param null|string $before (int64) The upper limit for the version numbers to be included in the response.
 	 * @param null|string $pageSize (integer) The maximum number of items to be returned in the response.
 	 */
 	public function __construct(
+		protected ?string $after = null,
 		protected ?string $before = null,
 		protected ?string $pageSize = null,
 	) {
@@ -33,6 +35,12 @@ class ListSales extends Request
 
 	public function defaultQuery(): array
 	{
-		return array_filter(['before' => $this->before, 'page_size' => $this->pageSize]);
+		return array_filter(['after' => $this->after, 'before' => $this->before, 'page_size' => $this->pageSize]);
+	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
 	}
 }

@@ -27,4 +27,10 @@ class GetSingleTag extends Request
 		protected string $tagId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

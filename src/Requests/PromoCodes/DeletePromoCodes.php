@@ -33,4 +33,10 @@ class DeletePromoCodes extends Request
 	{
 		return array_filter(['values' => $this->values]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

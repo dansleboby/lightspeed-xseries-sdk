@@ -39,4 +39,10 @@ class CreateSingleVariant extends Request implements HasBody
 	{
 		return array_filter(['common' => $this->common, 'details' => $this->details]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

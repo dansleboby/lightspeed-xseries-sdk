@@ -56,4 +56,10 @@ class CreateStoreCreditTransaction extends Request implements HasBody
 			'user_id' => $this->userId,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

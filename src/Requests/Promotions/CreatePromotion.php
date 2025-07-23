@@ -81,4 +81,10 @@ class CreatePromotion extends Request implements HasBody
 			'promo_code_summary' => $this->promoCodeSummary,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

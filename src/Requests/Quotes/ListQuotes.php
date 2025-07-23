@@ -22,15 +22,23 @@ class ListQuotes extends Request
 
 	/**
 	 * @param null|string $pageSize (integer) The maximum number of items to be returned in the response.
+	 * @param null|string $after (int64) The lower limit for the version numbers to be included in the response.
 	 */
 	public function __construct(
 		protected ?string $pageSize = null,
+		protected ?string $after = null,
 	) {
 	}
 
 
 	public function defaultQuery(): array
 	{
-		return array_filter(['page_size' => $this->pageSize]);
+		return array_filter(['page_size' => $this->pageSize, 'after' => $this->after]);
+	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
 	}
 }

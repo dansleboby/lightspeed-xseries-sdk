@@ -37,4 +37,10 @@ class UpdateTheProductsInPriceBook extends Request
 	{
 		return array_filter(['data' => $this->data, 'version' => $this->version]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

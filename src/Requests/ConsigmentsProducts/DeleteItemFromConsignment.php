@@ -29,4 +29,10 @@ class DeleteItemFromConsignment extends Request
 		protected string $productId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

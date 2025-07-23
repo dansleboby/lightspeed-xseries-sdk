@@ -7,37 +7,49 @@ use LightSpeed\XSeries\Requests\StoreCredits\StoreCreditBulkList;
 use LightSpeed\XSeries\Requests\StoreCredits\StoreCreditList;
 use LightSpeed\XSeries\Requests\StoreCredits\StoreCreditListForTheGivenCustomerId;
 use LightSpeed\XSeries\Requests\StoreCredits\StoreCreditReport;
-use LightSpeed\XSeries\Resource;
-use Saloon\Contracts\Response;
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
-class StoreCredits extends Resource
+class StoreCredits extends BaseResource
 {
 	/**
 	 * @param string $pageSize (integer) The maximum number of items to be returned in the response.
 	 * @param string $includes (string) Include supplementary data. The only valid value for includes[] is 'customer'.
+	 * @param string $accept
 	 */
-	public function storeCreditList(?string $pageSize, ?string $includes): Response
+	public function storeCreditList(?string $pageSize = null, ?string $includes = null, ?string $accept = null): Response
 	{
-		return $this->connector->send(new StoreCreditList($pageSize, $includes));
+		return $this->connector->send(new StoreCreditList($pageSize, $includes, $accept));
 	}
 
 
 	/**
 	 * @param string $customerId
 	 * @param string $includes (string) Include supplementary data. The only valid value for includes[] is 'customer'.
+	 * @param string $accept
 	 */
-	public function storeCreditListForTheGivenCustomerId(string $customerId, ?string $includes): Response
+	public function storeCreditListForTheGivenCustomerId(
+		string $customerId,
+		?string $includes = null,
+		?string $accept = null,
+	): Response
 	{
-		return $this->connector->send(new StoreCreditListForTheGivenCustomerId($customerId, $includes));
+		return $this->connector->send(new StoreCreditListForTheGivenCustomerId($customerId, $includes, $accept));
 	}
 
 
 	/**
 	 * @param array $values
+	 * @param string $contentType
+	 * @param string $accept
 	 */
-	public function storeCreditBulkList(?array $values): Response
+	public function storeCreditBulkList(
+		?array $values = null,
+		?string $contentType = null,
+		?string $accept = null,
+	): Response
 	{
-		return $this->connector->send(new StoreCreditBulkList($values));
+		return $this->connector->send(new StoreCreditBulkList($values, $contentType, $accept));
 	}
 
 
@@ -49,23 +61,30 @@ class StoreCredits extends Resource
 	 * @param mixed $type
 	 * @param mixed $notes
 	 * @param mixed $userId
+	 * @param string $contentType
+	 * @param string $accept
 	 */
 	public function createStoreCreditTransaction(
 		string $customerId,
-		mixed $amount,
-		mixed $clientId,
-		mixed $storeCreditCustomerId,
-		mixed $type,
-		mixed $notes,
-		mixed $userId,
+		mixed $amount = null,
+		mixed $clientId = null,
+		mixed $storeCreditCustomerId = null,
+		mixed $type = null,
+		mixed $notes = null,
+		mixed $userId = null,
+		?string $contentType = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new CreateStoreCreditTransaction($customerId, $amount, $clientId, $storeCreditCustomerId, $type, $notes, $userId));
+		return $this->connector->send(new CreateStoreCreditTransaction($customerId, $amount, $clientId, $storeCreditCustomerId, $type, $notes, $userId, $contentType, $accept));
 	}
 
 
-	public function storeCreditReport(): Response
+	/**
+	 * @param string $accept
+	 */
+	public function storeCreditReport(?string $accept = null): Response
 	{
-		return $this->connector->send(new StoreCreditReport());
+		return $this->connector->send(new StoreCreditReport($accept));
 	}
 }

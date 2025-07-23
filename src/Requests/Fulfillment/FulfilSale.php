@@ -31,4 +31,10 @@ class FulfilSale extends Request implements HasBody
 		protected string $saleId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

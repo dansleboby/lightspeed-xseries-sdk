@@ -27,4 +27,10 @@ class GetSingleUser extends Request
 		protected string $userId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

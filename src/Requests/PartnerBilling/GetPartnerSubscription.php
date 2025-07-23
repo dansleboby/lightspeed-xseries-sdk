@@ -27,4 +27,10 @@ class GetPartnerSubscription extends Request
 		protected string $subscriptionId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

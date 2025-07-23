@@ -56,4 +56,10 @@ class CreateGiftCardTransaction extends Request implements HasBody
 			'time_zone' => $this->timeZone,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

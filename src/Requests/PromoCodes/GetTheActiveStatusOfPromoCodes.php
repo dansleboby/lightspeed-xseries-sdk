@@ -37,4 +37,10 @@ class GetTheActiveStatusOfPromoCodes extends Request implements HasBody
 	{
 		return array_filter(['values' => $this->values]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

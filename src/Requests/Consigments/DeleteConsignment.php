@@ -27,4 +27,10 @@ class DeleteConsignment extends Request
 		protected string $consignmentId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

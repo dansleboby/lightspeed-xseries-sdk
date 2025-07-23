@@ -27,4 +27,10 @@ class GetAllThePaymentsDataAssociatedWithSingleRegister extends Request
 		protected string $registerId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

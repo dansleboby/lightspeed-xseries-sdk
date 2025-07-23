@@ -27,4 +27,10 @@ class DeleteCustomer extends Request
 		protected string $customerId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

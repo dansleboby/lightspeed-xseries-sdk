@@ -75,4 +75,10 @@ class CreateOrUpdateRegisterSale extends Request implements HasBody
 			'accounts_transaction_id' => $this->accountsTransactionId,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

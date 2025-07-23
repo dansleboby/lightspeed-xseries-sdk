@@ -53,4 +53,10 @@ class ListRequestRecords extends Request
 			'channel_id' => $this->channelId,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

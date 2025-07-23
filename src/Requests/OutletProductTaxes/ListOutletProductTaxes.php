@@ -22,12 +22,14 @@ class ListOutletProductTaxes extends Request
 
 	/**
 	 * @param null|string $outletId (string) The ID of the outlet for which the results should be returned.
+	 * @param null|string $after (int64) The lower limit for the version numbers to be included in the response.
 	 * @param null|string $before (int64) The upper limit for the version numbers to be included in the response.
 	 * @param null|string $pageSize (integer) The maximum number of items to be returned in the response.
 	 * @param null|string $deleted (bool) Whether to include deleted resources.
 	 */
 	public function __construct(
 		protected ?string $outletId = null,
+		protected ?string $after = null,
 		protected ?string $before = null,
 		protected ?string $pageSize = null,
 		protected ?string $deleted = null,
@@ -39,9 +41,16 @@ class ListOutletProductTaxes extends Request
 	{
 		return array_filter([
 			'outlet_id' => $this->outletId,
+			'after' => $this->after,
 			'before' => $this->before,
 			'page_size' => $this->pageSize,
 			'deleted' => $this->deleted,
 		]);
+	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
 	}
 }

@@ -15,74 +15,91 @@ use LightSpeed\XSeries\Requests\PriceBooks\UpdatePriceBook;
 use LightSpeed\XSeries\Requests\PriceBooks\UpdateSinglePriceBook;
 use LightSpeed\XSeries\Requests\PriceBooks\UpdateTheProductsInPriceBook;
 use LightSpeed\XSeries\Requests\PriceBooks\UpdateTheProductsToPriceBook;
-use LightSpeed\XSeries\Resource;
-use Saloon\Contracts\Response;
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
-class PriceBooks extends Resource
+class PriceBooks extends BaseResource
 {
 	/**
+	 * @param string $after (int64) The lower limit for the version numbers to be included in the response.
 	 * @param string $before (int64) The upper limit for the version numbers to be included in the response.
 	 * @param string $pageSize (integer) The maximum number of items to be returned in the response.
+	 * @param string $accept
 	 */
-	public function listPriceBookProducts(?string $before, ?string $pageSize): Response
-	{
-		return $this->connector->send(new ListPriceBookProducts($before, $pageSize));
-	}
-
-
-	/**
-	 * @param string $before (int64) The upper limit for the version numbers to be included in the response.
-	 * @param string $pageSize (integer) The maximum number of items to be returned in the response.
-	 */
-	public function listPriceBooks(?string $before, ?string $pageSize): Response
-	{
-		return $this->connector->send(new ListPriceBooks($before, $pageSize));
-	}
-
-
-	/**
-	 * @param mixed $name
-	 * @param mixed $customerGroupId
-	 * @param mixed $id
-	 * @param mixed $validFrom
-	 * @param mixed $validTo
-	 * @param mixed $restrictToPlatformKey
-	 * @param mixed $outletId
-	 * @param mixed $restrictToPlatformLabel
-	 * @param mixed $customerGroup
-	 * @param mixed $version
-	 * @param mixed $deletedAt
-	 * @param mixed $createdAt
-	 * @param mixed $updatedAt
-	 * @param mixed $outlet
-	 */
-	public function createPriceBook(
-		mixed $name,
-		mixed $customerGroupId,
-		mixed $id,
-		mixed $validFrom,
-		mixed $validTo,
-		mixed $restrictToPlatformKey,
-		mixed $outletId,
-		mixed $restrictToPlatformLabel,
-		mixed $customerGroup,
-		mixed $version,
-		mixed $deletedAt,
-		mixed $createdAt,
-		mixed $updatedAt,
-		mixed $outlet,
+	public function listPriceBookProducts(
+		?string $after = null,
+		?string $before = null,
+		?string $pageSize = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new CreatePriceBook($name, $customerGroupId, $id, $validFrom, $validTo, $restrictToPlatformKey, $outletId, $restrictToPlatformLabel, $customerGroup, $version, $deletedAt, $createdAt, $updatedAt, $outlet));
+		return $this->connector->send(new ListPriceBookProducts($after, $before, $pageSize, $accept));
+	}
+
+
+	/**
+	 * @param string $after (int64) The lower limit for the version numbers to be included in the response.
+	 * @param string $before (int64) The upper limit for the version numbers to be included in the response.
+	 * @param string $pageSize (integer) The maximum number of items to be returned in the response.
+	 * @param string $accept
+	 */
+	public function listPriceBooks(
+		?string $after = null,
+		?string $before = null,
+		?string $pageSize = null,
+		?string $accept = null,
+	): Response
+	{
+		return $this->connector->send(new ListPriceBooks($after, $before, $pageSize, $accept));
+	}
+
+
+	/**
+	 * @param mixed $name
+	 * @param mixed $customerGroupId
+	 * @param mixed $id
+	 * @param mixed $validFrom
+	 * @param mixed $validTo
+	 * @param mixed $restrictToPlatformKey
+	 * @param mixed $outletId
+	 * @param mixed $restrictToPlatformLabel
+	 * @param mixed $customerGroup
+	 * @param mixed $version
+	 * @param mixed $deletedAt
+	 * @param mixed $createdAt
+	 * @param mixed $updatedAt
+	 * @param mixed $outlet
+	 * @param string $accept
+	 */
+	public function createPriceBook(
+		mixed $name = null,
+		mixed $customerGroupId = null,
+		mixed $id = null,
+		mixed $validFrom = null,
+		mixed $validTo = null,
+		mixed $restrictToPlatformKey = null,
+		mixed $outletId = null,
+		mixed $restrictToPlatformLabel = null,
+		mixed $customerGroup = null,
+		mixed $version = null,
+		mixed $deletedAt = null,
+		mixed $createdAt = null,
+		mixed $updatedAt = null,
+		mixed $outlet = null,
+		?string $accept = null,
+	): Response
+	{
+		return $this->connector->send(new CreatePriceBook($name, $customerGroupId, $id, $validFrom, $validTo, $restrictToPlatformKey, $outletId, $restrictToPlatformLabel, $customerGroup, $version, $deletedAt, $createdAt, $updatedAt, $outlet, $accept));
 	}
 
 
 	/**
 	 * @param string $priceBookId
+	 * @param string $accept
 	 */
-	public function getSinglePriceBook(string $priceBookId): Response
+	public function getSinglePriceBook(string $priceBookId, ?string $accept = null): Response
 	{
-		return $this->connector->send(new GetSinglePriceBook($priceBookId));
+		return $this->connector->send(new GetSinglePriceBook($priceBookId, $accept));
 	}
 
 
@@ -102,65 +119,48 @@ class PriceBooks extends Resource
 	 * @param mixed $createdAt
 	 * @param mixed $updatedAt
 	 * @param mixed $outlet
+	 * @param string $accept
 	 */
 	public function updatePriceBook(
 		string $priceBookId,
-		mixed $name,
-		mixed $customerGroupId,
-		mixed $id,
-		mixed $validFrom,
-		mixed $validTo,
-		mixed $restrictToPlatformKey,
-		mixed $outletId,
-		mixed $restrictToPlatformLabel,
-		mixed $customerGroup,
-		mixed $version,
-		mixed $deletedAt,
-		mixed $createdAt,
-		mixed $updatedAt,
-		mixed $outlet,
+		mixed $name = null,
+		mixed $customerGroupId = null,
+		mixed $id = null,
+		mixed $validFrom = null,
+		mixed $validTo = null,
+		mixed $restrictToPlatformKey = null,
+		mixed $outletId = null,
+		mixed $restrictToPlatformLabel = null,
+		mixed $customerGroup = null,
+		mixed $version = null,
+		mixed $deletedAt = null,
+		mixed $createdAt = null,
+		mixed $updatedAt = null,
+		mixed $outlet = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new UpdatePriceBook($priceBookId, $name, $customerGroupId, $id, $validFrom, $validTo, $restrictToPlatformKey, $outletId, $restrictToPlatformLabel, $customerGroup, $version, $deletedAt, $createdAt, $updatedAt, $outlet));
+		return $this->connector->send(new UpdatePriceBook($priceBookId, $name, $customerGroupId, $id, $validFrom, $validTo, $restrictToPlatformKey, $outletId, $restrictToPlatformLabel, $customerGroup, $version, $deletedAt, $createdAt, $updatedAt, $outlet, $accept));
 	}
 
 
 	/**
 	 * @param string $priceBookId
+	 * @param string $accept
 	 */
-	public function deletePriceBook(string $priceBookId): Response
+	public function deletePriceBook(string $priceBookId, ?string $accept = null): Response
 	{
-		return $this->connector->send(new DeletePriceBook($priceBookId));
+		return $this->connector->send(new DeletePriceBook($priceBookId, $accept));
 	}
 
 
 	/**
 	 * @param string $priceBookId
+	 * @param string $accept
 	 */
-	public function listPriceBookProductsPerPriceBook(string $priceBookId): Response
+	public function listPriceBookProductsPerPriceBook(string $priceBookId, ?string $accept = null): Response
 	{
-		return $this->connector->send(new ListPriceBookProductsPerPriceBook($priceBookId));
-	}
-
-
-	/**
-	 * @param string $priceBookId
-	 * @param mixed $data
-	 * @param mixed $version
-	 */
-	public function addTheProductsToPriceBook(string $priceBookId, mixed $data, mixed $version): Response
-	{
-		return $this->connector->send(new AddTheProductsToPriceBook($priceBookId, $data, $version));
-	}
-
-
-	/**
-	 * @param string $priceBookId
-	 * @param mixed $data
-	 */
-	public function deleteSomeEntriesFromPriceBook(string $priceBookId, mixed $data): Response
-	{
-		return $this->connector->send(new DeleteSomeEntriesFromPriceBook($priceBookId, $data));
+		return $this->connector->send(new ListPriceBookProductsPerPriceBook($priceBookId, $accept));
 	}
 
 
@@ -168,10 +168,31 @@ class PriceBooks extends Resource
 	 * @param string $priceBookId
 	 * @param mixed $data
 	 * @param mixed $version
+	 * @param string $accept
 	 */
-	public function updateTheProductsToPriceBook(string $priceBookId, mixed $data, mixed $version): Response
+	public function addTheProductsToPriceBook(
+		string $priceBookId,
+		mixed $data = null,
+		mixed $version = null,
+		?string $accept = null,
+	): Response
 	{
-		return $this->connector->send(new UpdateTheProductsToPriceBook($priceBookId, $data, $version));
+		return $this->connector->send(new AddTheProductsToPriceBook($priceBookId, $data, $version, $accept));
+	}
+
+
+	/**
+	 * @param string $priceBookId
+	 * @param mixed $data
+	 * @param string $accept
+	 */
+	public function deleteSomeEntriesFromPriceBook(
+		string $priceBookId,
+		mixed $data = null,
+		?string $accept = null,
+	): Response
+	{
+		return $this->connector->send(new DeleteSomeEntriesFromPriceBook($priceBookId, $data, $accept));
 	}
 
 
@@ -179,32 +200,61 @@ class PriceBooks extends Resource
 	 * @param string $priceBookId
 	 * @param mixed $data
 	 * @param mixed $version
+	 * @param string $accept
 	 */
-	public function updateTheProductsInPriceBook(string $priceBookId, mixed $data, mixed $version): Response
+	public function updateTheProductsToPriceBook(
+		string $priceBookId,
+		mixed $data = null,
+		mixed $version = null,
+		?string $accept = null,
+	): Response
 	{
-		return $this->connector->send(new UpdateTheProductsInPriceBook($priceBookId, $data, $version));
+		return $this->connector->send(new UpdateTheProductsToPriceBook($priceBookId, $data, $version, $accept));
+	}
+
+
+	/**
+	 * @param string $priceBookId
+	 * @param mixed $data
+	 * @param mixed $version
+	 * @param string $contentType
+	 * @param string $accept
+	 */
+	public function updateTheProductsInPriceBook(
+		string $priceBookId,
+		mixed $data = null,
+		mixed $version = null,
+		?string $contentType = null,
+		?string $accept = null,
+	): Response
+	{
+		return $this->connector->send(new UpdateTheProductsInPriceBook($priceBookId, $data, $version, $contentType, $accept));
 	}
 
 
 	/**
 	 * @todo Fix duplicated method name
+	 * @param string $after (int64) The lower limit for the version numbers to be included in the response.
 	 * @param string $before (int64) The upper limit for the version numbers to be included in the response.
 	 * @param string $pageSize (integer) The maximum number of items to be returned in the response.
 	 * @param string $order (string) Field used to sort the results.
 	 * @param string $direction (string) Sort results direction. ASC or DESC.
 	 * @param string $deleted (boolean) Include (true) or exclude (false) deleted price books. Default value is false.
 	 * @param string $customerGroupId (stgring) Filter the list and show only price books linked to the specified Customer Group.
+	 * @param string $accept
 	 */
 	public function listPriceBooksDuplicate1(
-		?string $before,
-		?string $pageSize,
-		?string $order,
-		?string $direction,
-		?string $deleted,
-		?string $customerGroupId,
+		?string $after = null,
+		?string $before = null,
+		?string $pageSize = null,
+		?string $order = null,
+		?string $direction = null,
+		?string $deleted = null,
+		?string $customerGroupId = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new ListPriceBooks($before, $pageSize, $order, $direction, $deleted, $customerGroupId));
+		return $this->connector->send(new ListPriceBooks($after, $before, $pageSize, $order, $direction, $deleted, $customerGroupId, $accept));
 	}
 
 
@@ -215,27 +265,32 @@ class PriceBooks extends Resource
 	 * @param mixed $validFrom
 	 * @param mixed $validTo
 	 * @param mixed $restrictToPlatform
+	 * @param string $contentType
+	 * @param string $accept
 	 */
 	public function createSinglePriceBook(
-		mixed $customerGroupIds,
-		mixed $outletIds,
-		mixed $name,
-		mixed $validFrom,
-		mixed $validTo,
-		mixed $restrictToPlatform,
+		mixed $customerGroupIds = null,
+		mixed $outletIds = null,
+		mixed $name = null,
+		mixed $validFrom = null,
+		mixed $validTo = null,
+		mixed $restrictToPlatform = null,
+		?string $contentType = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new CreateSinglePriceBook($customerGroupIds, $outletIds, $name, $validFrom, $validTo, $restrictToPlatform));
+		return $this->connector->send(new CreateSinglePriceBook($customerGroupIds, $outletIds, $name, $validFrom, $validTo, $restrictToPlatform, $contentType, $accept));
 	}
 
 
 	/**
 	 * @todo Fix duplicated method name
 	 * @param string $id
+	 * @param string $accept
 	 */
-	public function getSinglePriceBookDuplicate2(string $id): Response
+	public function getSinglePriceBookDuplicate2(string $id, ?string $accept = null): Response
 	{
-		return $this->connector->send(new GetSinglePriceBook($id));
+		return $this->connector->send(new GetSinglePriceBook($id, $accept));
 	}
 
 
@@ -247,17 +302,21 @@ class PriceBooks extends Resource
 	 * @param mixed $validFrom
 	 * @param mixed $validTo
 	 * @param mixed $restrictToPlatform
+	 * @param string $contentType
+	 * @param string $accept
 	 */
 	public function updateSinglePriceBook(
 		string $id,
-		mixed $customerGroupIds,
-		mixed $outletIds,
-		mixed $name,
-		mixed $validFrom,
-		mixed $validTo,
-		mixed $restrictToPlatform,
+		mixed $customerGroupIds = null,
+		mixed $outletIds = null,
+		mixed $name = null,
+		mixed $validFrom = null,
+		mixed $validTo = null,
+		mixed $restrictToPlatform = null,
+		?string $contentType = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new UpdateSinglePriceBook($id, $customerGroupIds, $outletIds, $name, $validFrom, $validTo, $restrictToPlatform));
+		return $this->connector->send(new UpdateSinglePriceBook($id, $customerGroupIds, $outletIds, $name, $validFrom, $validTo, $restrictToPlatform, $contentType, $accept));
 	}
 }

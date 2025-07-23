@@ -35,4 +35,10 @@ class CloseSingleRegister extends Request
 	{
 		return array_filter(['payments' => $this->payments]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

@@ -4,10 +4,10 @@ namespace LightSpeed\XSeries\Resource;
 
 use LightSpeed\XSeries\Requests\Authorization\RefreshTokenRequest;
 use LightSpeed\XSeries\Requests\Authorization\TokenRequest;
-use LightSpeed\XSeries\Resource;
-use Saloon\Contracts\Response;
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
-class Authorization extends Resource
+class Authorization extends BaseResource
 {
 	public function tokenRequest(): Response
 	{

@@ -46,4 +46,10 @@ class UpdateCustomField extends Request
 			'print_on_receipt' => $this->printOnReceipt,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

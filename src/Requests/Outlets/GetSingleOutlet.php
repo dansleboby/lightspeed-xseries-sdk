@@ -27,4 +27,10 @@ class GetSingleOutlet extends Request
 		protected string $outletId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

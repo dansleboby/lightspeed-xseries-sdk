@@ -27,4 +27,10 @@ class GetSingleRequestLog extends Request
 		protected string $requestLogId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

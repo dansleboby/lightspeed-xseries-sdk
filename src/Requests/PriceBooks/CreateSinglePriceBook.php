@@ -54,4 +54,10 @@ class CreateSinglePriceBook extends Request implements HasBody
 			'restrict_to_platform' => $this->restrictToPlatform,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

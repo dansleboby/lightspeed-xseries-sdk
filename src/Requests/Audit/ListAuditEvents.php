@@ -53,4 +53,10 @@ class ListAuditEvents extends Request
 			'type' => $this->type,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

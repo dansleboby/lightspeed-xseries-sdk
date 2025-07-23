@@ -35,4 +35,10 @@ class SetImagePosition extends Request
 	{
 		return array_filter(['position' => $this->position]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

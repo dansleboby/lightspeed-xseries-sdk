@@ -3,13 +3,14 @@
 namespace LightSpeed\XSeries\Resource;
 
 use LightSpeed\XSeries\Requests\Search\SearchForResources;
-use LightSpeed\XSeries\Resource;
-use Saloon\Contracts\Response;
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
-class Search extends Resource
+class Search extends BaseResource
 {
 	/**
 	 * @param string $type (Required) (string) The entity type to search for.
+	 * @param string $orderBy (string) The attribute used to sort items returned in the response.
 	 * @param string $orderDirection (string) Sorting direction.
 	 * @param string $pageSize (integer) The maximum number of objects to be included in the response, currently limited to 1000. Specifying more than 1000 will result in 1000 objects being returned.
 	 * @param string $offset (integer) The number of objects to be "skipped" for the response. Used for pagination.
@@ -42,36 +43,39 @@ class Search extends Resource
 	 * @param string $companyName (string) CUSTOMERS The company_name for the customers to find.
 	 * @param string $mobile (string) CUSTOMERS The mobile number for the customers to find.
 	 * @param string $phone (string) CUSTOMERS The phone number for the customers to find.
+	 * @param string $accept
 	 */
 	public function searchForResources(
-		?string $type,
-		?string $orderDirection,
-		?string $pageSize,
-		?string $offset,
-		?string $id,
-		?string $deleted,
-		?string $status,
-		?string $invoiceNumber,
-		?string $customerId,
-		?string $userId,
-		?string $outletId,
-		?string $dateFrom,
-		?string $dateTo,
-		?string $sku,
-		?string $supplierId,
-		?string $brandId,
-		?string $tagId,
-		?string $productTypeId,
-		?string $variantParentId,
-		?string $customerCode,
-		?string $email,
-		?string $firstName,
-		?string $lastName,
-		?string $companyName,
-		?string $mobile,
-		?string $phone,
+		?string $type = null,
+		?string $orderBy = null,
+		?string $orderDirection = null,
+		?string $pageSize = null,
+		?string $offset = null,
+		?string $id = null,
+		?string $deleted = null,
+		?string $status = null,
+		?string $invoiceNumber = null,
+		?string $customerId = null,
+		?string $userId = null,
+		?string $outletId = null,
+		?string $dateFrom = null,
+		?string $dateTo = null,
+		?string $sku = null,
+		?string $supplierId = null,
+		?string $brandId = null,
+		?string $tagId = null,
+		?string $productTypeId = null,
+		?string $variantParentId = null,
+		?string $customerCode = null,
+		?string $email = null,
+		?string $firstName = null,
+		?string $lastName = null,
+		?string $companyName = null,
+		?string $mobile = null,
+		?string $phone = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new SearchForResources($type, $orderDirection, $pageSize, $offset, $id, $id, $deleted, $status, $invoiceNumber, $customerId, $userId, $outletId, $dateFrom, $dateTo, $sku, $sku, $supplierId, $supplierId, $brandId, $brandId, $tagId, $tagId, $productTypeId, $productTypeId, $variantParentId, $variantParentId, $customerCode, $email, $firstName, $lastName, $companyName, $mobile, $phone));
+		return $this->connector->send(new SearchForResources($type, $orderBy, $orderDirection, $pageSize, $offset, $id, $id, $deleted, $status, $invoiceNumber, $customerId, $userId, $outletId, $dateFrom, $dateTo, $sku, $sku, $supplierId, $supplierId, $brandId, $brandId, $tagId, $tagId, $productTypeId, $productTypeId, $variantParentId, $variantParentId, $customerCode, $email, $firstName, $lastName, $companyName, $mobile, $phone, $accept));
 	}
 }

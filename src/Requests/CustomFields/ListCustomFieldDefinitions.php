@@ -33,4 +33,10 @@ class ListCustomFieldDefinitions extends Request
 	{
 		return array_filter(['entity' => $this->entity]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

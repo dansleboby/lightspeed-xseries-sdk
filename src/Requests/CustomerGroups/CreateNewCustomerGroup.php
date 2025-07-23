@@ -57,4 +57,10 @@ class CreateNewCustomerGroup extends Request implements HasBody
 			'version' => $this->version,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

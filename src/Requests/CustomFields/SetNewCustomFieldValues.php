@@ -41,4 +41,10 @@ class SetNewCustomFieldValues extends Request implements HasBody
 	{
 		return array_filter(['entity' => $this->entity, 'entity_id' => $this->entityId, 'values' => $this->values]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

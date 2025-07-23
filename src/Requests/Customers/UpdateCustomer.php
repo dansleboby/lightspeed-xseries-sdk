@@ -154,4 +154,10 @@ class UpdateCustomer extends Request
 			'custom_field_4' => $this->customField4,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

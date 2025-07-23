@@ -5,23 +5,28 @@ namespace LightSpeed\XSeries\Resource;
 use LightSpeed\XSeries\Requests\RemoteRules\CreateRemoteRule;
 use LightSpeed\XSeries\Requests\RemoteRules\DeleteRemoteRule;
 use LightSpeed\XSeries\Requests\RemoteRules\ListRemoteRules;
-use LightSpeed\XSeries\Resource;
-use Saloon\Contracts\Response;
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
-class RemoteRules extends Resource
+class RemoteRules extends BaseResource
 {
-	public function listRemoteRules(): Response
+	/**
+	 * @param string $accept
+	 */
+	public function listRemoteRules(?string $accept = null): Response
 	{
-		return $this->connector->send(new ListRemoteRules());
+		return $this->connector->send(new ListRemoteRules($accept));
 	}
 
 
 	/**
 	 * @param mixed $url
+	 * @param string $contentType
+	 * @param string $accept
 	 */
-	public function createRemoteRule(mixed $url): Response
+	public function createRemoteRule(mixed $url = null, ?string $contentType = null, ?string $accept = null): Response
 	{
-		return $this->connector->send(new CreateRemoteRule($url));
+		return $this->connector->send(new CreateRemoteRule($url, $contentType, $accept));
 	}
 
 

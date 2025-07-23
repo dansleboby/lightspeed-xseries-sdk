@@ -23,4 +23,10 @@ class ListRemoteRules extends Request
 	public function __construct()
 	{
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

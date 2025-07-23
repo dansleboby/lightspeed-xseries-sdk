@@ -27,4 +27,10 @@ class GetSingleProductType extends Request
 		protected string $productTypeId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

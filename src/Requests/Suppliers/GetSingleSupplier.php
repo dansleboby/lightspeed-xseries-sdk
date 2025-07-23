@@ -27,4 +27,10 @@ class GetSingleSupplier extends Request
 		protected string $supplierId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

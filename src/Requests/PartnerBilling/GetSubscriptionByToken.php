@@ -27,4 +27,10 @@ class GetSubscriptionByToken extends Request
 		protected string $partnerSubscriptionToken,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

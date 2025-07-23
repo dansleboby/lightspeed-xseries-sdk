@@ -99,4 +99,10 @@ class CreateConsignment extends Request implements HasBody
 			'filters' => $this->filters,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

@@ -37,4 +37,10 @@ class ListProducts extends Request
 	{
 		return array_filter(['since_version' => $this->sinceVersion, 'page_size' => $this->pageSize, 'include_deleted' => $this->includeDeleted]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

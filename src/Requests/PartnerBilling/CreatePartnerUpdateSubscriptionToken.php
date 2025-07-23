@@ -48,4 +48,10 @@ class CreatePartnerUpdateSubscriptionToken extends Request implements HasBody
 			'product_handle' => $this->productHandle,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

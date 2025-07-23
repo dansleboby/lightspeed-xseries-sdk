@@ -54,4 +54,10 @@ class ApplyDiscountsToSaleObject extends Request implements HasBody
 			'is_tax_inclusive' => $this->isTaxInclusive,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

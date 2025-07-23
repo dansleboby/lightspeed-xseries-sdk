@@ -97,4 +97,10 @@ class UpdateConsignment extends Request
 			'filters' => $this->filters,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

@@ -6,36 +6,45 @@ use LightSpeed\XSeries\Requests\Sales\CreateOrUpdateRegisterSale;
 use LightSpeed\XSeries\Requests\Sales\GetSingleSale;
 use LightSpeed\XSeries\Requests\Sales\ListSales;
 use LightSpeed\XSeries\Requests\Sales\ReturnSale;
-use LightSpeed\XSeries\Resource;
-use Saloon\Contracts\Response;
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
-class Sales extends Resource
+class Sales extends BaseResource
 {
 	/**
+	 * @param string $after (int64) The lower limit for the version numbers to be included in the response.
 	 * @param string $before (int64) The upper limit for the version numbers to be included in the response.
 	 * @param string $pageSize (integer) The maximum number of items to be returned in the response.
+	 * @param string $accept
 	 */
-	public function listSales(?string $before, ?string $pageSize): Response
+	public function listSales(
+		?string $after = null,
+		?string $before = null,
+		?string $pageSize = null,
+		?string $accept = null,
+	): Response
 	{
-		return $this->connector->send(new ListSales($before, $pageSize));
+		return $this->connector->send(new ListSales($after, $before, $pageSize, $accept));
 	}
 
 
 	/**
 	 * @param string $saleId
+	 * @param string $accept
 	 */
-	public function getSingleSale(string $saleId): Response
+	public function getSingleSale(string $saleId, ?string $accept = null): Response
 	{
-		return $this->connector->send(new GetSingleSale($saleId));
+		return $this->connector->send(new GetSingleSale($saleId, $accept));
 	}
 
 
 	/**
 	 * @param string $saleId
+	 * @param string $accept
 	 */
-	public function returnSale(string $saleId): Response
+	public function returnSale(string $saleId, ?string $accept = null): Response
 	{
-		return $this->connector->send(new ReturnSale($saleId));
+		return $this->connector->send(new ReturnSale($saleId, $accept));
 	}
 
 
@@ -53,23 +62,27 @@ class Sales extends Resource
 	 * @param mixed $shortCode
 	 * @param mixed $invoiceNumber
 	 * @param mixed $accountsTransactionId
+	 * @param string $accept
+	 * @param string $contentType
 	 */
 	public function createOrUpdateRegisterSale(
-		mixed $registerSaleProducts,
-		mixed $registerSalePayments,
-		mixed $registerId,
-		mixed $customerId,
-		mixed $userId,
-		mixed $source,
-		mixed $sourceId,
-		mixed $saleDate,
-		mixed $note,
-		mixed $status,
-		mixed $shortCode,
-		mixed $invoiceNumber,
-		mixed $accountsTransactionId,
+		mixed $registerSaleProducts = null,
+		mixed $registerSalePayments = null,
+		mixed $registerId = null,
+		mixed $customerId = null,
+		mixed $userId = null,
+		mixed $source = null,
+		mixed $sourceId = null,
+		mixed $saleDate = null,
+		mixed $note = null,
+		mixed $status = null,
+		mixed $shortCode = null,
+		mixed $invoiceNumber = null,
+		mixed $accountsTransactionId = null,
+		?string $accept = null,
+		?string $contentType = null,
 	): Response
 	{
-		return $this->connector->send(new CreateOrUpdateRegisterSale($registerSaleProducts, $registerSalePayments, $registerId, $customerId, $userId, $source, $sourceId, $saleDate, $note, $status, $shortCode, $invoiceNumber, $accountsTransactionId));
+		return $this->connector->send(new CreateOrUpdateRegisterSale($registerSaleProducts, $registerSalePayments, $registerId, $customerId, $userId, $source, $sourceId, $saleDate, $note, $status, $shortCode, $invoiceNumber, $accountsTransactionId, $accept, $contentType));
 	}
 }

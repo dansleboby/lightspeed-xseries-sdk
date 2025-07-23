@@ -153,4 +153,10 @@ class CreateNewCustomer extends Request implements HasBody
 			'custom_field_4' => $this->customField4,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

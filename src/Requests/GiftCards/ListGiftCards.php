@@ -44,4 +44,10 @@ class ListGiftCards extends Request
 			'status' => $this->status,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

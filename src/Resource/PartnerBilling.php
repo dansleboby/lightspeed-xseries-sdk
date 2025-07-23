@@ -7,23 +7,27 @@ use LightSpeed\XSeries\Requests\PartnerBilling\CreatePartnerUpdateSubscriptionTo
 use LightSpeed\XSeries\Requests\PartnerBilling\GetPartnerSubscription;
 use LightSpeed\XSeries\Requests\PartnerBilling\GetSubscriptionByToken;
 use LightSpeed\XSeries\Requests\PartnerBilling\ListPartnerSubscriptions;
-use LightSpeed\XSeries\Resource;
-use Saloon\Contracts\Response;
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
-class PartnerBilling extends Resource
+class PartnerBilling extends BaseResource
 {
-	public function listPartnerSubscriptions(): Response
+	/**
+	 * @param string $accept
+	 */
+	public function listPartnerSubscriptions(?string $accept = null): Response
 	{
-		return $this->connector->send(new ListPartnerSubscriptions());
+		return $this->connector->send(new ListPartnerSubscriptions($accept));
 	}
 
 
 	/**
 	 * @param string $subscriptionId
+	 * @param string $accept
 	 */
-	public function getPartnerSubscription(string $subscriptionId): Response
+	public function getPartnerSubscription(string $subscriptionId, ?string $accept = null): Response
 	{
-		return $this->connector->send(new GetPartnerSubscription($subscriptionId));
+		return $this->connector->send(new GetPartnerSubscription($subscriptionId, $accept));
 	}
 
 
@@ -33,25 +37,30 @@ class PartnerBilling extends Resource
 	 * @param mixed $returnUrl
 	 * @param mixed $components
 	 * @param mixed $couponCode
+	 * @param string $contentType
+	 * @param string $accept
 	 */
 	public function createPartnerSubscriptionToken(
-		mixed $priceHandle,
-		mixed $productHandle,
-		mixed $returnUrl,
-		mixed $components,
-		mixed $couponCode,
+		mixed $priceHandle = null,
+		mixed $productHandle = null,
+		mixed $returnUrl = null,
+		mixed $components = null,
+		mixed $couponCode = null,
+		?string $contentType = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new CreatePartnerSubscriptionToken($priceHandle, $productHandle, $returnUrl, $components, $couponCode));
+		return $this->connector->send(new CreatePartnerSubscriptionToken($priceHandle, $productHandle, $returnUrl, $components, $couponCode, $contentType, $accept));
 	}
 
 
 	/**
 	 * @param string $partnerSubscriptionToken
+	 * @param string $accept
 	 */
-	public function getSubscriptionByToken(string $partnerSubscriptionToken): Response
+	public function getSubscriptionByToken(string $partnerSubscriptionToken, ?string $accept = null): Response
 	{
-		return $this->connector->send(new GetSubscriptionByToken($partnerSubscriptionToken));
+		return $this->connector->send(new GetSubscriptionByToken($partnerSubscriptionToken, $accept));
 	}
 
 
@@ -60,14 +69,18 @@ class PartnerBilling extends Resource
 	 * @param mixed $components
 	 * @param mixed $priceHandle
 	 * @param mixed $productHandle
+	 * @param string $contentType
+	 * @param string $accept
 	 */
 	public function createPartnerUpdateSubscriptionToken(
-		mixed $returnUrl,
-		mixed $components,
-		mixed $priceHandle,
-		mixed $productHandle,
+		mixed $returnUrl = null,
+		mixed $components = null,
+		mixed $priceHandle = null,
+		mixed $productHandle = null,
+		?string $contentType = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new CreatePartnerUpdateSubscriptionToken($returnUrl, $components, $priceHandle, $productHandle));
+		return $this->connector->send(new CreatePartnerUpdateSubscriptionToken($returnUrl, $components, $priceHandle, $productHandle, $contentType, $accept));
 	}
 }

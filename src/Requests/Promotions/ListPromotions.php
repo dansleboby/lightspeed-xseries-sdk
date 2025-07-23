@@ -37,4 +37,10 @@ class ListPromotions extends Request
 	{
 		return array_filter(['end_time_to' => $this->endTimeTo, 'end_time_from' => $this->endTimeFrom, 'page_size' => $this->pageSize]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

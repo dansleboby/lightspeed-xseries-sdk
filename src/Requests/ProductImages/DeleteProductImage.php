@@ -27,4 +27,10 @@ class DeleteProductImage extends Request
 		protected string $productImageId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

@@ -7,19 +7,27 @@ use LightSpeed\XSeries\Requests\Customers\DeleteCustomer;
 use LightSpeed\XSeries\Requests\Customers\GetSingleCustomer;
 use LightSpeed\XSeries\Requests\Customers\ListCustomers;
 use LightSpeed\XSeries\Requests\Customers\UpdateCustomer;
-use LightSpeed\XSeries\Resource;
-use Saloon\Contracts\Response;
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
-class Customers extends Resource
+class Customers extends BaseResource
 {
 	/**
+	 * @param string $after (int64) The lower limit for the version numbers to be included in the response.
 	 * @param string $before (int64) The upper limit for the version numbers to be included in the response.
 	 * @param string $pageSize (integer) The maximum number of items to be returned in the response.
 	 * @param string $deleted (bool) Whether to include deleted resources.
+	 * @param string $accept
 	 */
-	public function listCustomers(?string $before, ?string $pageSize, ?string $deleted): Response
+	public function listCustomers(
+		?string $after = null,
+		?string $before = null,
+		?string $pageSize = null,
+		?string $deleted = null,
+		?string $accept = null,
+	): Response
 	{
-		return $this->connector->send(new ListCustomers($before, $pageSize, $deleted));
+		return $this->connector->send(new ListCustomers($after, $before, $pageSize, $deleted, $accept));
 	}
 
 
@@ -63,59 +71,62 @@ class Customers extends Resource
 	 * @param mixed $customField2
 	 * @param mixed $customField3
 	 * @param mixed $customField4
+	 * @param string $accept
 	 */
 	public function createNewCustomer(
-		mixed $customerCode,
-		mixed $name,
-		mixed $firstName,
-		mixed $lastName,
-		mixed $email,
-		mixed $yearToDate,
-		mixed $balance,
-		mixed $loyaltyBalance,
-		mixed $note,
-		mixed $gender,
-		mixed $dateOfBirth,
-		mixed $companyName,
-		mixed $doNotEmail,
-		mixed $contactSource,
-		mixed $phone,
-		mixed $mobile,
-		mixed $fax,
-		mixed $twitter,
-		mixed $website,
-		mixed $physicalAddress1,
-		mixed $physicalAddress2,
-		mixed $physicalSuburb,
-		mixed $physicalCity,
-		mixed $physicalPostcode,
-		mixed $physicalState,
-		mixed $physicalCountryId,
-		mixed $postalAddress1,
-		mixed $postalAddress2,
-		mixed $postalSuburb,
-		mixed $postalCity,
-		mixed $postalPostcode,
-		mixed $postalState,
-		mixed $postalCountryId,
-		mixed $customerGroupId,
-		mixed $enableLoyalty,
-		mixed $customField1,
-		mixed $customField2,
-		mixed $customField3,
-		mixed $customField4,
+		mixed $customerCode = null,
+		mixed $name = null,
+		mixed $firstName = null,
+		mixed $lastName = null,
+		mixed $email = null,
+		mixed $yearToDate = null,
+		mixed $balance = null,
+		mixed $loyaltyBalance = null,
+		mixed $note = null,
+		mixed $gender = null,
+		mixed $dateOfBirth = null,
+		mixed $companyName = null,
+		mixed $doNotEmail = null,
+		mixed $contactSource = null,
+		mixed $phone = null,
+		mixed $mobile = null,
+		mixed $fax = null,
+		mixed $twitter = null,
+		mixed $website = null,
+		mixed $physicalAddress1 = null,
+		mixed $physicalAddress2 = null,
+		mixed $physicalSuburb = null,
+		mixed $physicalCity = null,
+		mixed $physicalPostcode = null,
+		mixed $physicalState = null,
+		mixed $physicalCountryId = null,
+		mixed $postalAddress1 = null,
+		mixed $postalAddress2 = null,
+		mixed $postalSuburb = null,
+		mixed $postalCity = null,
+		mixed $postalPostcode = null,
+		mixed $postalState = null,
+		mixed $postalCountryId = null,
+		mixed $customerGroupId = null,
+		mixed $enableLoyalty = null,
+		mixed $customField1 = null,
+		mixed $customField2 = null,
+		mixed $customField3 = null,
+		mixed $customField4 = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new CreateNewCustomer($customerCode, $name, $firstName, $lastName, $email, $yearToDate, $balance, $loyaltyBalance, $note, $gender, $dateOfBirth, $companyName, $doNotEmail, $contactSource, $phone, $mobile, $fax, $twitter, $website, $physicalAddress1, $physicalAddress2, $physicalSuburb, $physicalCity, $physicalPostcode, $physicalState, $physicalCountryId, $postalAddress1, $postalAddress2, $postalSuburb, $postalCity, $postalPostcode, $postalState, $postalCountryId, $customerGroupId, $enableLoyalty, $customField1, $customField2, $customField3, $customField4));
+		return $this->connector->send(new CreateNewCustomer($customerCode, $name, $firstName, $lastName, $email, $yearToDate, $balance, $loyaltyBalance, $note, $gender, $dateOfBirth, $companyName, $doNotEmail, $contactSource, $phone, $mobile, $fax, $twitter, $website, $physicalAddress1, $physicalAddress2, $physicalSuburb, $physicalCity, $physicalPostcode, $physicalState, $physicalCountryId, $postalAddress1, $postalAddress2, $postalSuburb, $postalCity, $postalPostcode, $postalState, $postalCountryId, $customerGroupId, $enableLoyalty, $customField1, $customField2, $customField3, $customField4, $accept));
 	}
 
 
 	/**
 	 * @param string $customerId
+	 * @param string $accept
 	 */
-	public function getSingleCustomer(string $customerId): Response
+	public function getSingleCustomer(string $customerId, ?string $accept = null): Response
 	{
-		return $this->connector->send(new GetSingleCustomer($customerId));
+		return $this->connector->send(new GetSingleCustomer($customerId, $accept));
 	}
 
 
@@ -161,60 +172,63 @@ class Customers extends Resource
 	 * @param mixed $customField2
 	 * @param mixed $customField3
 	 * @param mixed $customField4
+	 * @param string $accept
 	 */
 	public function updateCustomer(
 		string $customerId,
-		mixed $id,
-		mixed $customerCode,
-		mixed $name,
-		mixed $firstName,
-		mixed $lastName,
-		mixed $email,
-		mixed $yearToDate,
-		mixed $balance,
-		mixed $loyaltyBalance,
-		mixed $note,
-		mixed $gender,
-		mixed $dateOfBirth,
-		mixed $companyName,
-		mixed $doNotEmail,
-		mixed $contactSource,
-		mixed $phone,
-		mixed $mobile,
-		mixed $fax,
-		mixed $twitter,
-		mixed $website,
-		mixed $physicalAddress1,
-		mixed $physicalAddress2,
-		mixed $physicalSuburb,
-		mixed $physicalCity,
-		mixed $physicalPostcode,
-		mixed $physicalState,
-		mixed $physicalCountryId,
-		mixed $postalAddress1,
-		mixed $postalAddress2,
-		mixed $postalSuburb,
-		mixed $postalCity,
-		mixed $postalPostcode,
-		mixed $postalState,
-		mixed $postalCountryId,
-		mixed $customerGroupId,
-		mixed $enableLoyalty,
-		mixed $customField1,
-		mixed $customField2,
-		mixed $customField3,
-		mixed $customField4,
+		mixed $id = null,
+		mixed $customerCode = null,
+		mixed $name = null,
+		mixed $firstName = null,
+		mixed $lastName = null,
+		mixed $email = null,
+		mixed $yearToDate = null,
+		mixed $balance = null,
+		mixed $loyaltyBalance = null,
+		mixed $note = null,
+		mixed $gender = null,
+		mixed $dateOfBirth = null,
+		mixed $companyName = null,
+		mixed $doNotEmail = null,
+		mixed $contactSource = null,
+		mixed $phone = null,
+		mixed $mobile = null,
+		mixed $fax = null,
+		mixed $twitter = null,
+		mixed $website = null,
+		mixed $physicalAddress1 = null,
+		mixed $physicalAddress2 = null,
+		mixed $physicalSuburb = null,
+		mixed $physicalCity = null,
+		mixed $physicalPostcode = null,
+		mixed $physicalState = null,
+		mixed $physicalCountryId = null,
+		mixed $postalAddress1 = null,
+		mixed $postalAddress2 = null,
+		mixed $postalSuburb = null,
+		mixed $postalCity = null,
+		mixed $postalPostcode = null,
+		mixed $postalState = null,
+		mixed $postalCountryId = null,
+		mixed $customerGroupId = null,
+		mixed $enableLoyalty = null,
+		mixed $customField1 = null,
+		mixed $customField2 = null,
+		mixed $customField3 = null,
+		mixed $customField4 = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new UpdateCustomer($customerId, $id, $customerCode, $name, $firstName, $lastName, $email, $yearToDate, $balance, $loyaltyBalance, $note, $gender, $dateOfBirth, $companyName, $doNotEmail, $contactSource, $phone, $mobile, $fax, $twitter, $website, $physicalAddress1, $physicalAddress2, $physicalSuburb, $physicalCity, $physicalPostcode, $physicalState, $physicalCountryId, $postalAddress1, $postalAddress2, $postalSuburb, $postalCity, $postalPostcode, $postalState, $postalCountryId, $customerGroupId, $enableLoyalty, $customField1, $customField2, $customField3, $customField4));
+		return $this->connector->send(new UpdateCustomer($customerId, $id, $customerCode, $name, $firstName, $lastName, $email, $yearToDate, $balance, $loyaltyBalance, $note, $gender, $dateOfBirth, $companyName, $doNotEmail, $contactSource, $phone, $mobile, $fax, $twitter, $website, $physicalAddress1, $physicalAddress2, $physicalSuburb, $physicalCity, $physicalPostcode, $physicalState, $physicalCountryId, $postalAddress1, $postalAddress2, $postalSuburb, $postalCity, $postalPostcode, $postalState, $postalCountryId, $customerGroupId, $enableLoyalty, $customField1, $customField2, $customField3, $customField4, $accept));
 	}
 
 
 	/**
 	 * @param string $customerId
+	 * @param string $accept
 	 */
-	public function deleteCustomer(string $customerId): Response
+	public function deleteCustomer(string $customerId, ?string $accept = null): Response
 	{
-		return $this->connector->send(new DeleteCustomer($customerId));
+		return $this->connector->send(new DeleteCustomer($customerId, $accept));
 	}
 }

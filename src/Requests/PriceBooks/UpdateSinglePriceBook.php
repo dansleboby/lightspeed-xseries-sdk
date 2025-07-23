@@ -52,4 +52,10 @@ class UpdateSinglePriceBook extends Request
 			'restrict_to_platform' => $this->restrictToPlatform,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

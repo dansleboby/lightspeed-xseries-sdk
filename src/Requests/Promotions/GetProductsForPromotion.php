@@ -27,4 +27,10 @@ class GetProductsForPromotion extends Request
 		protected string $promotionId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

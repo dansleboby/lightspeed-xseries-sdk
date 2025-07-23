@@ -39,4 +39,10 @@ class UploadImage extends Request implements HasBody
 	{
 		return array_filter(['image' => $this->image]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

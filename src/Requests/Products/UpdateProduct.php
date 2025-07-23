@@ -37,4 +37,10 @@ class UpdateProduct extends Request
 	{
 		return array_filter(['common' => $this->common, 'details' => $this->details]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

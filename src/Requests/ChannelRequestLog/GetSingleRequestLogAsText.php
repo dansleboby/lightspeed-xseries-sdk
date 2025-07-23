@@ -27,4 +27,10 @@ class GetSingleRequestLogAsText extends Request
 		protected string $requestLogIdTxt,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

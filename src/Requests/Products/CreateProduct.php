@@ -64,6 +64,7 @@ class CreateProduct extends Request implements HasBody
 	 * @param null|mixed $imageThumbnailUrl
 	 * @param null|mixed $isActive
 	 * @param null|mixed $tagIds
+	 * @param null|string $after
 	 * @param null|string $before
 	 * @param null|string $pageSize
 	 * @param null|string $deleted
@@ -108,6 +109,7 @@ class CreateProduct extends Request implements HasBody
 		protected mixed $imageThumbnailUrl = null,
 		protected mixed $isActive = null,
 		protected mixed $tagIds = null,
+		protected ?string $after = null,
 		protected ?string $before = null,
 		protected ?string $pageSize = null,
 		protected ?string $deleted = null,
@@ -163,6 +165,12 @@ class CreateProduct extends Request implements HasBody
 
 	public function defaultQuery(): array
 	{
-		return array_filter(['before' => $this->before, 'page_size' => $this->pageSize, 'deleted' => $this->deleted]);
+		return array_filter(['after' => $this->after, 'before' => $this->before, 'page_size' => $this->pageSize, 'deleted' => $this->deleted]);
+	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
 	}
 }

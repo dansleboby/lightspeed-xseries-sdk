@@ -39,4 +39,10 @@ class CreateRule extends Request implements HasBody
 	{
 		return array_filter(['event_type' => $this->eventType, 'remote_rule_id' => $this->remoteRuleId]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

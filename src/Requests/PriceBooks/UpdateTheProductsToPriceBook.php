@@ -41,4 +41,10 @@ class UpdateTheProductsToPriceBook extends Request implements HasBody
 	{
 		return array_filter(['data' => $this->data, 'version' => $this->version]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

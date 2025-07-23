@@ -27,4 +27,10 @@ class VoidGiftCard extends Request
 		protected string $number,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

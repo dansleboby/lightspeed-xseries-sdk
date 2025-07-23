@@ -35,4 +35,10 @@ class ListCustomFieldValues extends Request
 	{
 		return array_filter(['entity' => $this->entity, 'entity_id' => $this->entityId]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

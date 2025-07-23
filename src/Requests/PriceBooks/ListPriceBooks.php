@@ -21,6 +21,7 @@ class ListPriceBooks extends Request
 
 
 	/**
+	 * @param null|string $after (int64) The lower limit for the version numbers to be included in the response.
 	 * @param null|string $before (int64) The upper limit for the version numbers to be included in the response.
 	 * @param null|string $pageSize (integer) The maximum number of items to be returned in the response.
 	 * @param null|string $order (string) Field used to sort the results.
@@ -29,6 +30,7 @@ class ListPriceBooks extends Request
 	 * @param null|string $customerGroupId (stgring) Filter the list and show only price books linked to the specified Customer Group.
 	 */
 	public function __construct(
+		protected ?string $after = null,
 		protected ?string $before = null,
 		protected ?string $pageSize = null,
 		protected ?string $order = null,
@@ -42,6 +44,7 @@ class ListPriceBooks extends Request
 	public function defaultQuery(): array
 	{
 		return array_filter([
+			'after' => $this->after,
 			'before' => $this->before,
 			'page_size' => $this->pageSize,
 			'order' => $this->order,
@@ -49,5 +52,11 @@ class ListPriceBooks extends Request
 			'deleted' => $this->deleted,
 			'customer_group_id' => $this->customerGroupId,
 		]);
+	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
 	}
 }

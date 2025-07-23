@@ -35,4 +35,10 @@ class DeleteSomeEntriesFromPriceBook extends Request
 	{
 		return array_filter(['data' => $this->data]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

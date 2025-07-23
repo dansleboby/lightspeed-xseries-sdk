@@ -22,6 +22,7 @@ class SearchForResources extends Request
 
 	/**
 	 * @param null|string $type (Required) (string) The entity type to search for.
+	 * @param null|string $orderBy (string) The attribute used to sort items returned in the response.
 	 * @param null|string $orderDirection (string) Sorting direction.
 	 * @param null|string $pageSize (integer) The maximum number of objects to be included in the response, currently limited to 1000. Specifying more than 1000 will result in 1000 objects being returned.
 	 * @param null|string $offset (integer) The number of objects to be "skipped" for the response. Used for pagination.
@@ -57,6 +58,7 @@ class SearchForResources extends Request
 	 */
 	public function __construct(
 		protected ?string $type = null,
+		protected ?string $orderBy = null,
 		protected ?string $orderDirection = null,
 		protected ?string $pageSize = null,
 		protected ?string $offset = null,
@@ -90,6 +92,7 @@ class SearchForResources extends Request
 	{
 		return array_filter([
 			'type' => $this->type,
+			'order_by' => $this->orderBy,
 			'order_direction' => $this->orderDirection,
 			'page_size' => $this->pageSize,
 			'offset' => $this->offset,
@@ -123,5 +126,11 @@ class SearchForResources extends Request
 			'mobile' => $this->mobile,
 			'phone' => $this->phone,
 		]);
+	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
 	}
 }

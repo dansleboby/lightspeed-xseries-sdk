@@ -27,4 +27,10 @@ class DeletePriceBook extends Request
 		protected string $priceBookId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

@@ -43,4 +43,10 @@ class CreateOrUpdateSupplier extends Request implements HasBody
 	{
 		return array_filter(['id' => $this->id, 'name' => $this->name, 'description' => $this->description, 'contact' => $this->contact]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

@@ -25,6 +25,7 @@ class ListSerialNumbers extends Request
 	 * @param null|string $outletId (string) An outlet ID. This filters the serial numbers to only include ones on this outlet.
 	 * @param null|string $saleId (string) A sale ID. This filters the serial numbers to only include ones that were sold in the specified sale.
 	 * @param null|string $lineItemId (string) A line item ID. This filters the serial numbers to only include ones sold in the specified line item.
+	 * @param null|string $after (int64) The lower limit for the version numbers to be included in the response.
 	 * @param null|string $before (int64) The upper limit for the version numbers to be included in the response.
 	 * @param null|string $pageSize (integer) The maximum number of items to be returned in the response.
 	 */
@@ -33,6 +34,7 @@ class ListSerialNumbers extends Request
 		protected ?string $outletId = null,
 		protected ?string $saleId = null,
 		protected ?string $lineItemId = null,
+		protected ?string $after = null,
 		protected ?string $before = null,
 		protected ?string $pageSize = null,
 	) {
@@ -46,6 +48,7 @@ class ListSerialNumbers extends Request
 			'outlet_id' => $this->outletId,
 			'sale_id' => $this->saleId,
 			'line_item_id' => $this->lineItemId,
+			'after' => $this->after,
 			'before' => $this->before,
 			'page_size' => $this->pageSize,
 		]);

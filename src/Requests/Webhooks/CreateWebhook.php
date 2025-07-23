@@ -54,4 +54,10 @@ class CreateWebhook extends Request implements HasBody
 			'type' => $this->type,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

@@ -8,14 +8,17 @@ use LightSpeed\XSeries\Requests\Consigments\GetSingleConsignment;
 use LightSpeed\XSeries\Requests\Consigments\ListConsignmentTotals;
 use LightSpeed\XSeries\Requests\Consigments\ListConsignments;
 use LightSpeed\XSeries\Requests\Consigments\UpdateConsignment;
-use LightSpeed\XSeries\Resource;
-use Saloon\Contracts\Response;
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
-class Consigments extends Resource
+class Consigments extends BaseResource
 {
-	public function listConsignments(): Response
+	/**
+	 * @param string $accept
+	 */
+	public function listConsignments(?string $accept = null): Response
 	{
-		return $this->connector->send(new ListConsignments());
+		return $this->connector->send(new ListConsignments($accept));
 	}
 
 
@@ -41,41 +44,44 @@ class Consigments extends Resource
 	 * @param mixed $deletedAt
 	 * @param mixed $version
 	 * @param mixed $filters
+	 * @param string $accept
 	 */
 	public function createConsignment(
-		mixed $outletId,
-		mixed $name,
-		mixed $dueAt,
-		mixed $type,
-		mixed $status,
-		mixed $supplierId,
-		mixed $sourceOutletId,
-		mixed $consignmentDate,
-		mixed $receivedAt,
-		mixed $showInactive,
-		mixed $supplierInvoice,
-		mixed $reference,
-		mixed $totalCountGain,
-		mixed $totalCostGain,
-		mixed $totalCountLoss,
-		mixed $totalCostLoss,
-		mixed $createdAt,
-		mixed $updatedAt,
-		mixed $deletedAt,
-		mixed $version,
-		mixed $filters,
+		mixed $outletId = null,
+		mixed $name = null,
+		mixed $dueAt = null,
+		mixed $type = null,
+		mixed $status = null,
+		mixed $supplierId = null,
+		mixed $sourceOutletId = null,
+		mixed $consignmentDate = null,
+		mixed $receivedAt = null,
+		mixed $showInactive = null,
+		mixed $supplierInvoice = null,
+		mixed $reference = null,
+		mixed $totalCountGain = null,
+		mixed $totalCostGain = null,
+		mixed $totalCountLoss = null,
+		mixed $totalCostLoss = null,
+		mixed $createdAt = null,
+		mixed $updatedAt = null,
+		mixed $deletedAt = null,
+		mixed $version = null,
+		mixed $filters = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new CreateConsignment($outletId, $name, $dueAt, $type, $status, $supplierId, $sourceOutletId, $consignmentDate, $receivedAt, $showInactive, $supplierInvoice, $reference, $totalCountGain, $totalCostGain, $totalCountLoss, $totalCostLoss, $createdAt, $updatedAt, $deletedAt, $version, $filters));
+		return $this->connector->send(new CreateConsignment($outletId, $name, $dueAt, $type, $status, $supplierId, $sourceOutletId, $consignmentDate, $receivedAt, $showInactive, $supplierInvoice, $reference, $totalCountGain, $totalCostGain, $totalCountLoss, $totalCostLoss, $createdAt, $updatedAt, $deletedAt, $version, $filters, $accept));
 	}
 
 
 	/**
 	 * @param string $consignmentId
+	 * @param string $accept
 	 */
-	public function getSingleConsignment(string $consignmentId): Response
+	public function getSingleConsignment(string $consignmentId, ?string $accept = null): Response
 	{
-		return $this->connector->send(new GetSingleConsignment($consignmentId));
+		return $this->connector->send(new GetSingleConsignment($consignmentId, $accept));
 	}
 
 
@@ -102,50 +108,54 @@ class Consigments extends Resource
 	 * @param mixed $deletedAt
 	 * @param mixed $version
 	 * @param mixed $filters
+	 * @param string $accept
 	 */
 	public function updateConsignment(
 		string $consignmentId,
-		mixed $outletId,
-		mixed $name,
-		mixed $dueAt,
-		mixed $type,
-		mixed $status,
-		mixed $supplierId,
-		mixed $sourceOutletId,
-		mixed $consignmentDate,
-		mixed $receivedAt,
-		mixed $showInactive,
-		mixed $supplierInvoice,
-		mixed $reference,
-		mixed $totalCountGain,
-		mixed $totalCostGain,
-		mixed $totalCountLoss,
-		mixed $totalCostLoss,
-		mixed $createdAt,
-		mixed $updatedAt,
-		mixed $deletedAt,
-		mixed $version,
-		mixed $filters,
+		mixed $outletId = null,
+		mixed $name = null,
+		mixed $dueAt = null,
+		mixed $type = null,
+		mixed $status = null,
+		mixed $supplierId = null,
+		mixed $sourceOutletId = null,
+		mixed $consignmentDate = null,
+		mixed $receivedAt = null,
+		mixed $showInactive = null,
+		mixed $supplierInvoice = null,
+		mixed $reference = null,
+		mixed $totalCountGain = null,
+		mixed $totalCostGain = null,
+		mixed $totalCountLoss = null,
+		mixed $totalCostLoss = null,
+		mixed $createdAt = null,
+		mixed $updatedAt = null,
+		mixed $deletedAt = null,
+		mixed $version = null,
+		mixed $filters = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new UpdateConsignment($consignmentId, $outletId, $name, $dueAt, $type, $status, $supplierId, $sourceOutletId, $consignmentDate, $receivedAt, $showInactive, $supplierInvoice, $reference, $totalCountGain, $totalCostGain, $totalCountLoss, $totalCostLoss, $createdAt, $updatedAt, $deletedAt, $version, $filters));
+		return $this->connector->send(new UpdateConsignment($consignmentId, $outletId, $name, $dueAt, $type, $status, $supplierId, $sourceOutletId, $consignmentDate, $receivedAt, $showInactive, $supplierInvoice, $reference, $totalCountGain, $totalCostGain, $totalCountLoss, $totalCostLoss, $createdAt, $updatedAt, $deletedAt, $version, $filters, $accept));
 	}
 
 
 	/**
 	 * @param string $consignmentId
+	 * @param string $accept
 	 */
-	public function deleteConsignment(string $consignmentId): Response
+	public function deleteConsignment(string $consignmentId, ?string $accept = null): Response
 	{
-		return $this->connector->send(new DeleteConsignment($consignmentId));
+		return $this->connector->send(new DeleteConsignment($consignmentId, $accept));
 	}
 
 
 	/**
 	 * @param string $consignmentId
+	 * @param string $accept
 	 */
-	public function listConsignmentTotals(string $consignmentId): Response
+	public function listConsignmentTotals(string $consignmentId, ?string $accept = null): Response
 	{
-		return $this->connector->send(new ListConsignmentTotals($consignmentId));
+		return $this->connector->send(new ListConsignmentTotals($consignmentId, $accept));
 	}
 }

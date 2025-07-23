@@ -35,4 +35,10 @@ class StoreCreditList extends Request
 	{
 		return array_filter(['page_size' => $this->pageSize, 'includes[]' => $this->includes]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

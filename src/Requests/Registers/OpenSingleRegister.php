@@ -35,4 +35,10 @@ class OpenSingleRegister extends Request
 	{
 		return array_filter(['register_open_time' => $this->registerOpenTime]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

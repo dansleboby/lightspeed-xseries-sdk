@@ -26,6 +26,7 @@ class SearchPromotions extends Request
 	 * @param null|string $startDate (string) Only show promotions that have a start date after or equal to this
 	 * @param null|string $endDate (string) Only show promotions that have an end date before or equal to this
 	 * @param null|string $outletId (array of strings) Only show promotions linked to one or many of the outlets specified here
+	 * @param null|string $orderBy (string) Sort the result by this field
 	 * @param null|string $direction (string) Sort direction
 	 * @param null|string $offset (integer) Offset
 	 * @param null|string $pageSize (integer) Number of results per page
@@ -36,6 +37,7 @@ class SearchPromotions extends Request
 		protected ?string $startDate = null,
 		protected ?string $endDate = null,
 		protected ?string $outletId = null,
+		protected ?string $orderBy = null,
 		protected ?string $direction = null,
 		protected ?string $offset = null,
 		protected ?string $pageSize = null,
@@ -51,9 +53,16 @@ class SearchPromotions extends Request
 			'start_date' => $this->startDate,
 			'end_date' => $this->endDate,
 			'outlet_id' => $this->outletId,
+			'order_by' => $this->orderBy,
 			'direction' => $this->direction,
 			'offset' => $this->offset,
 			'page_size' => $this->pageSize,
 		]);
+	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
 	}
 }

@@ -27,4 +27,10 @@ class GetSingleQuote extends Request
 		protected string $quoteId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

@@ -78,4 +78,10 @@ class CreatePriceBook extends Request implements HasBody
 			'outlet' => $this->outlet,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

@@ -37,4 +37,10 @@ class CreateRemoteRule extends Request implements HasBody
 	{
 		return array_filter(['url' => $this->url]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

@@ -27,4 +27,10 @@ class GetSingleSale extends Request
 		protected string $saleId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

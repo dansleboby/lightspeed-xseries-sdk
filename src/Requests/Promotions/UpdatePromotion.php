@@ -79,4 +79,10 @@ class UpdatePromotion extends Request
 			'promo_code_summary' => $this->promoCodeSummary,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

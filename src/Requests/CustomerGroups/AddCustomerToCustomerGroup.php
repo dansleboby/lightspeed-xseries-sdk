@@ -39,4 +39,10 @@ class AddCustomerToCustomerGroup extends Request implements HasBody
 	{
 		return array_filter(['customer_ids' => $this->customerIds]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

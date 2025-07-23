@@ -4,14 +4,17 @@ namespace LightSpeed\XSeries\Resource;
 
 use LightSpeed\XSeries\Requests\Audit\ListAuditEvents;
 use LightSpeed\XSeries\Requests\Audit\ListSecurityEventsForCurrentUser;
-use LightSpeed\XSeries\Resource;
-use Saloon\Contracts\Response;
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
-class Audit extends Resource
+class Audit extends BaseResource
 {
-	public function listSecurityEventsForCurrentUser(): Response
+	/**
+	 * @param string $accept
+	 */
+	public function listSecurityEventsForCurrentUser(?string $accept = null): Response
 	{
-		return $this->connector->send(new ListSecurityEventsForCurrentUser());
+		return $this->connector->send(new ListSecurityEventsForCurrentUser($accept));
 	}
 
 
@@ -23,17 +26,19 @@ class Audit extends Resource
 	 * @param string $order (string) The sorting order for the results. Sorting is done by the `occurred_at` parameter. The default order is descending.
 	 * @param string $userId (string) The `id` of the user to filter the events by.
 	 * @param string $type (string) The `type` of the events to be filtered for the response.
+	 * @param string $accept
 	 */
 	public function listAuditEvents(
-		?string $pageSize,
-		?string $offset,
-		?string $from,
-		?string $to,
-		?string $order,
-		?string $userId,
-		?string $type,
+		?string $pageSize = null,
+		?string $offset = null,
+		?string $from = null,
+		?string $to = null,
+		?string $order = null,
+		?string $userId = null,
+		?string $type = null,
+		?string $accept = null,
 	): Response
 	{
-		return $this->connector->send(new ListAuditEvents($pageSize, $offset, $from, $to, $order, $userId, $type));
+		return $this->connector->send(new ListAuditEvents($pageSize, $offset, $from, $to, $order, $userId, $type, $accept));
 	}
 }

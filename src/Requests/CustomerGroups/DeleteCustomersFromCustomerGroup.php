@@ -27,4 +27,10 @@ class DeleteCustomersFromCustomerGroup extends Request
 		protected string $customerGroupId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

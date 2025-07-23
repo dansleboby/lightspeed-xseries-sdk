@@ -27,4 +27,10 @@ class GetProduct extends Request
 		protected string $id,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

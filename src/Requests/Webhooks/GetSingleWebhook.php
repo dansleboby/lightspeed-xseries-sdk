@@ -27,4 +27,10 @@ class GetSingleWebhook extends Request
 		protected string $webhookId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

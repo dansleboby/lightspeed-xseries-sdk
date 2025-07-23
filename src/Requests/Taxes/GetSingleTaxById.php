@@ -27,4 +27,10 @@ class GetSingleTaxById extends Request
 		protected string $taxId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

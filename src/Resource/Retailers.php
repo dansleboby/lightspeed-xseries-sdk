@@ -3,13 +3,16 @@
 namespace LightSpeed\XSeries\Resource;
 
 use LightSpeed\XSeries\Requests\Retailers\GetInformationAboutThisRetailer;
-use LightSpeed\XSeries\Resource;
-use Saloon\Contracts\Response;
+use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
-class Retailers extends Resource
+class Retailers extends BaseResource
 {
-	public function getInformationAboutThisRetailer(): Response
+	/**
+	 * @param string $accept
+	 */
+	public function getInformationAboutThisRetailer(?string $accept = null): Response
 	{
-		return $this->connector->send(new GetInformationAboutThisRetailer());
+		return $this->connector->send(new GetInformationAboutThisRetailer($accept));
 	}
 }

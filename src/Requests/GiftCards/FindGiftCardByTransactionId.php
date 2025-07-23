@@ -27,4 +27,10 @@ class FindGiftCardByTransactionId extends Request
 		protected string $transactionId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

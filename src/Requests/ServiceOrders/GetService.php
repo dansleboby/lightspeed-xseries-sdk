@@ -27,4 +27,10 @@ class GetService extends Request
 		protected string $serviceId,
 	) {
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }

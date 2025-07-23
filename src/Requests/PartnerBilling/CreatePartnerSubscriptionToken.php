@@ -51,4 +51,10 @@ class CreatePartnerSubscriptionToken extends Request implements HasBody
 			'coupon_code' => $this->couponCode,
 		]);
 	}
+
+
+	public function defaultHeaders(): array
+	{
+		return array_filter([]);
+	}
 }
