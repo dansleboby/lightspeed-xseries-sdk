@@ -1,0 +1,47 @@
+<?php
+
+namespace LightSpeed\XSeries\Requests\OutletProductTaxes;
+
+use DateTime;
+use Saloon\Enums\Method;
+use Saloon\Http\Request;
+
+/**
+ * List outlet product taxes
+ */
+class ListOutletProductTaxes extends Request
+{
+	protected Method $method = Method::GET;
+
+
+	public function resolveEndpoint(): string
+	{
+		return "/api/2.0/outlet_taxes";
+	}
+
+
+	/**
+	 * @param null|string $outletId (string) The ID of the outlet for which the results should be returned.
+	 * @param null|string $before (int64) The upper limit for the version numbers to be included in the response.
+	 * @param null|string $pageSize (integer) The maximum number of items to be returned in the response.
+	 * @param null|string $deleted (bool) Whether to include deleted resources.
+	 */
+	public function __construct(
+		protected ?string $outletId = null,
+		protected ?string $before = null,
+		protected ?string $pageSize = null,
+		protected ?string $deleted = null,
+	) {
+	}
+
+
+	public function defaultQuery(): array
+	{
+		return array_filter([
+			'outlet_id' => $this->outletId,
+			'before' => $this->before,
+			'page_size' => $this->pageSize,
+			'deleted' => $this->deleted,
+		]);
+	}
+}
