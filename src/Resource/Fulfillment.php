@@ -2,29 +2,27 @@
 
 namespace LightSpeed\XSeries\Resource;
 
-use LightSpeed\XSeries\Requests\Fulfillment\FulfilSale;
-use LightSpeed\XSeries\Requests\Fulfillment\ListSaleFulfillments;
+use LightSpeed\XSeries\Requests\Fulfillment\FulfillSale;
+use LightSpeed\XSeries\Requests\Fulfillment\GetFulfillmentsBySaleId;
 use Saloon\Http\BaseResource;
 use Saloon\Http\Response;
 
 class Fulfillment extends BaseResource
 {
 	/**
-	 * @param string $saleId
-	 * @param string $accept
+	 * @param string $saleId The sale id
 	 */
-	public function listSaleFulfillments(string $saleId, ?string $accept = null): Response
+	public function getFulfillmentsBySaleId(string $saleId): Response
 	{
-		return $this->connector->send(new ListSaleFulfillments($saleId, $accept));
+		return $this->connector->send(new GetFulfillmentsBySaleId($saleId));
 	}
 
 
 	/**
-	 * @param string $saleId
-	 * @param string $accept
+	 * @param string $saleId The sale id
 	 */
-	public function fulfilSale(string $saleId, ?string $accept = null): Response
+	public function fulfillSale(string $saleId): Response
 	{
-		return $this->connector->send(new FulfilSale($saleId, $accept));
+		return $this->connector->send(new FulfillSale($saleId));
 	}
 }

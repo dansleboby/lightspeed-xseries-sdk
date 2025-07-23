@@ -7,7 +7,9 @@ use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 /**
- * Get service
+ * GetService
+ *
+ * Get a single service order.
  */
 class GetService extends Request
 {
@@ -16,21 +18,15 @@ class GetService extends Request
 
 	public function resolveEndpoint(): string
 	{
-		return "/api/2.0/services/{$this->serviceId}";
+		return "/services/{$this->serviceId}";
 	}
 
 
 	/**
-	 * @param string $serviceId
+	 * @param string $serviceId ID of the service to get
 	 */
 	public function __construct(
 		protected string $serviceId,
 	) {
-	}
-
-
-	public function defaultHeaders(): array
-	{
-		return array_filter([]);
 	}
 }

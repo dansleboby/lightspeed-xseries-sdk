@@ -7,7 +7,9 @@ use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 /**
- * List outlet product taxes
+ * listOutletProductTaxes
+ *
+ * Returns a paginated list of outlet-product-tax records.
  */
 class ListOutletProductTaxes extends Request
 {
@@ -16,23 +18,23 @@ class ListOutletProductTaxes extends Request
 
 	public function resolveEndpoint(): string
 	{
-		return "/api/2.0/outlet_taxes";
+		return "/outlet_taxes";
 	}
 
 
 	/**
-	 * @param null|string $outletId (string) The ID of the outlet for which the results should be returned.
-	 * @param null|string $after (int64) The lower limit for the version numbers to be included in the response.
-	 * @param null|string $before (int64) The upper limit for the version numbers to be included in the response.
-	 * @param null|string $pageSize (integer) The maximum number of items to be returned in the response.
-	 * @param null|string $deleted (bool) Whether to include deleted resources.
+	 * @param null|string $outletId The ID of the outlet for which the results should be returned.
+	 * @param null|int $after The lower limit for the version numbers to be included in the response.
+	 * @param null|int $before The upper limit for the version numbers to be included in the response.
+	 * @param null|int $pageSize The maximum number of items to be returned in the response.
+	 * @param null|bool $deleted Indicates whether deleted items should be included in the response.
 	 */
 	public function __construct(
 		protected ?string $outletId = null,
-		protected ?string $after = null,
-		protected ?string $before = null,
-		protected ?string $pageSize = null,
-		protected ?string $deleted = null,
+		protected ?int $after = null,
+		protected ?int $before = null,
+		protected ?int $pageSize = null,
+		protected ?bool $deleted = null,
 	) {
 	}
 
@@ -46,11 +48,5 @@ class ListOutletProductTaxes extends Request
 			'page_size' => $this->pageSize,
 			'deleted' => $this->deleted,
 		]);
-	}
-
-
-	public function defaultHeaders(): array
-	{
-		return array_filter([]);
 	}
 }

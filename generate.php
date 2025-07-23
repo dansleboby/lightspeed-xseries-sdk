@@ -15,8 +15,8 @@ use Nette\PhpGenerator\PhpFile;
 // -----------------------------------------------------------------------------
 
 $config = [
-    'path'      => 'X-Series API Collection.postman_collection.json',
-    'type'      => 'postman',
+    'path'      => 'specs/API 2.0 - v1.0.json',
+    'type'      => 'openapi',
     'name'      => 'XSeriesSdk',
     'namespace' => 'LightSpeed\XSeries',
     'output'    => './src',

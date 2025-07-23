@@ -2,30 +2,28 @@
 
 namespace LightSpeed\XSeries\Resource;
 
-use LightSpeed\XSeries\Requests\Quotes\GetSingleQuote;
-use LightSpeed\XSeries\Requests\Quotes\ListQuotes;
+use LightSpeed\XSeries\Requests\Quotes\GetQuoteQuoteId;
+use LightSpeed\XSeries\Requests\Quotes\GetQuotes;
 use Saloon\Http\BaseResource;
 use Saloon\Http\Response;
 
 class Quotes extends BaseResource
 {
 	/**
-	 * @param string $quoteId
-	 * @param string $accept
+	 * @param string $quoteId ID of the quote to get
 	 */
-	public function getSingleQuote(string $quoteId, ?string $accept = null): Response
+	public function getQuoteQuoteId(string $quoteId): Response
 	{
-		return $this->connector->send(new GetSingleQuote($quoteId, $accept));
+		return $this->connector->send(new GetQuoteQuoteId($quoteId));
 	}
 
 
 	/**
-	 * @param string $pageSize (integer) The maximum number of items to be returned in the response.
-	 * @param string $after (int64) The lower limit for the version numbers to be included in the response.
-	 * @param string $accept
+	 * @param int $after The lower limit for the quote id to be included in the response. For proper pagination, it needs to be the quote id of the last item in the response from your previous request.
+	 * @param int $limit The maximum number of items to be returned in the response.
 	 */
-	public function listQuotes(?string $pageSize = null, ?string $after = null, ?string $accept = null): Response
+	public function getQuotes(?int $after = null, ?int $limit = null): Response
 	{
-		return $this->connector->send(new ListQuotes($pageSize, $after, $accept));
+		return $this->connector->send(new GetQuotes($after, $limit));
 	}
 }

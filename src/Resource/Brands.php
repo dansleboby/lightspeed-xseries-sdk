@@ -3,39 +3,55 @@
 namespace LightSpeed\XSeries\Resource;
 
 use LightSpeed\XSeries\Requests\Brands\CreateBrand;
-use LightSpeed\XSeries\Requests\Brands\GetSingleBrand;
+use LightSpeed\XSeries\Requests\Brands\DeleteBrandById;
+use LightSpeed\XSeries\Requests\Brands\GetBrandById;
 use LightSpeed\XSeries\Requests\Brands\ListBrands;
+use LightSpeed\XSeries\Requests\Brands\UpdateBrandById;
 use Saloon\Http\BaseResource;
 use Saloon\Http\Response;
 
 class Brands extends BaseResource
 {
 	/**
-	 * @param string $after (int64) The lower limit for the version numbers to be included in the response.
-	 * @param string $before (int64) The upper limit for the version numbers to be included in the response.
-	 * @param string $pageSize (integer) The maximum number of items to be returned in the response.
+	 * @param int $after The lower limit for the version numbers to be included in the response.
+	 * @param int $before The upper limit for the version numbers to be included in the response.
+	 * @param int $pageSize The maximum number of items to be returned in the response.
 	 */
-	public function listBrands(?string $after = null, ?string $before = null, ?string $pageSize = null): Response
+	public function listBrands(?int $after = null, ?int $before = null, ?int $pageSize = null): Response
 	{
 		return $this->connector->send(new ListBrands($after, $before, $pageSize));
 	}
 
 
-	/**
-	 * @param mixed $name
-	 * @param string $accept
-	 */
-	public function createBrand(mixed $name = null, ?string $accept = null): Response
+	public function createBrand(): Response
 	{
-		return $this->connector->send(new CreateBrand($name, $accept));
+		return $this->connector->send(new CreateBrand());
 	}
 
 
 	/**
-	 * @param string $brandId
+	 * @param string $brandId The brand id
 	 */
-	public function getSingleBrand(string $brandId): Response
+	public function getBrandById(string $brandId): Response
 	{
-		return $this->connector->send(new GetSingleBrand($brandId));
+		return $this->connector->send(new GetBrandById($brandId));
+	}
+
+
+	/**
+	 * @param string $brandId The brand id.
+	 */
+	public function updateBrandById(string $brandId): Response
+	{
+		return $this->connector->send(new UpdateBrandById($brandId));
+	}
+
+
+	/**
+	 * @param string $brandId The brand id.
+	 */
+	public function deleteBrandById(string $brandId): Response
+	{
+		return $this->connector->send(new DeleteBrandById($brandId));
 	}
 }

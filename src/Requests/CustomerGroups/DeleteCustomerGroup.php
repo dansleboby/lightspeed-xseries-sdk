@@ -7,6 +7,8 @@ use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 /**
+ * DeleteCustomerGroup
+ *
  * Delete a customer group
  */
 class DeleteCustomerGroup extends Request
@@ -16,21 +18,15 @@ class DeleteCustomerGroup extends Request
 
 	public function resolveEndpoint(): string
 	{
-		return "/api/2.0/customer_groups/{$this->customerGroupId}";
+		return "/customer_groups/{$this->customerGroupId}";
 	}
 
 
 	/**
-	 * @param string $customerGroupId
+	 * @param string $customerGroupId The customer group id
 	 */
 	public function __construct(
 		protected string $customerGroupId,
 	) {
-	}
-
-
-	public function defaultHeaders(): array
-	{
-		return array_filter([]);
 	}
 }

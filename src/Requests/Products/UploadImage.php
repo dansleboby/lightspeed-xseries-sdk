@@ -9,7 +9,16 @@ use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
- * Upload an image
+ * UploadImage
+ *
+ * Upload a binary file with an image to be used for a product. This request should be encoded as
+ * `multipart/form-data`.
+ *
+ * > **Please Note** If you are reading this on
+ * https://x-series-api.lightspeedhq.com then the `Try It!` generated code will not work as the
+ * underlying code generator assumes the image will be base64 encoded, which the API does not support.
+ * Please have a look at https://x-series-api.lightspeedhq.com/docs/products_image_upload_basics
+ * instead.
  */
 class UploadImage extends Request implements HasBody
 {
@@ -20,29 +29,15 @@ class UploadImage extends Request implements HasBody
 
 	public function resolveEndpoint(): string
 	{
-		return "/api/2.0/products/{$this->productId}/actions/image_upload";
+		return "/products/{$this->productId}/actions/image_upload";
 	}
 
 
 	/**
-	 * @param string $productId
-	 * @param null|mixed $image
+	 * @param string $productId The product id
 	 */
 	public function __construct(
 		protected string $productId,
-		protected mixed $image = null,
 	) {
-	}
-
-
-	public function defaultBody(): array
-	{
-		return array_filter(['image' => $this->image]);
-	}
-
-
-	public function defaultHeaders(): array
-	{
-		return array_filter([]);
 	}
 }

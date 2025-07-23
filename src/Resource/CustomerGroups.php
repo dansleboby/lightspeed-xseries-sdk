@@ -2,12 +2,12 @@
 
 namespace LightSpeed\XSeries\Resource;
 
-use LightSpeed\XSeries\Requests\CustomerGroups\AddCustomerToCustomerGroup;
-use LightSpeed\XSeries\Requests\CustomerGroups\CreateNewCustomerGroup;
+use LightSpeed\XSeries\Requests\CustomerGroups\AddCustomersToCustomerGroup;
+use LightSpeed\XSeries\Requests\CustomerGroups\CreateCustomerGroup;
 use LightSpeed\XSeries\Requests\CustomerGroups\DeleteCustomerGroup;
 use LightSpeed\XSeries\Requests\CustomerGroups\DeleteCustomersFromCustomerGroup;
-use LightSpeed\XSeries\Requests\CustomerGroups\GetCustomersForCustomerGroup;
-use LightSpeed\XSeries\Requests\CustomerGroups\GetSingleCustomerGroup;
+use LightSpeed\XSeries\Requests\CustomerGroups\GetCustomerGroupById;
+use LightSpeed\XSeries\Requests\CustomerGroups\GetCustomerGroupCustomers;
 use LightSpeed\XSeries\Requests\CustomerGroups\ListCustomerGroups;
 use LightSpeed\XSeries\Requests\CustomerGroups\UpdateCustomerGroup;
 use Saloon\Http\BaseResource;
@@ -16,127 +16,86 @@ use Saloon\Http\Response;
 class CustomerGroups extends BaseResource
 {
 	/**
-	 * @param string $after (int64) The lower limit for the version numbers to be included in the response.
-	 * @param string $before (int64) The upper limit for the version numbers to be included in the response.
-	 * @param string $pageSize (integer) The maximum number of items to be returned in the response.
-	 * @param string $deleted (bool) Whether to include deleted resources.
-	 * @param string $accept
+	 * @param int $after The lower limit for the version numbers to be included in the response.
+	 * @param int $before The upper limit for the version numbers to be included in the response.
+	 * @param int $pageSize The maximum number of items to be returned in the response.
+	 * @param bool $deleted Indicates whether deleted items should be included in the response.
 	 */
 	public function listCustomerGroups(
-		?string $after = null,
-		?string $before = null,
-		?string $pageSize = null,
-		?string $deleted = null,
-		?string $accept = null,
+		?int $after = null,
+		?int $before = null,
+		?int $pageSize = null,
+		?bool $deleted = null,
 	): Response
 	{
-		return $this->connector->send(new ListCustomerGroups($after, $before, $pageSize, $deleted, $accept));
+		return $this->connector->send(new ListCustomerGroups($after, $before, $pageSize, $deleted));
 	}
 
 
-	/**
-	 * @param mixed $name
-	 * @param mixed $id
-	 * @param mixed $groupId
-	 * @param mixed $createdAt
-	 * @param mixed $updatedAt
-	 * @param mixed $deletedAt
-	 * @param mixed $version
-	 * @param string $accept
-	 */
-	public function createNewCustomerGroup(
-		mixed $name = null,
-		mixed $id = null,
-		mixed $groupId = null,
-		mixed $createdAt = null,
-		mixed $updatedAt = null,
-		mixed $deletedAt = null,
-		mixed $version = null,
-		?string $accept = null,
-	): Response
+	public function createCustomerGroup(): Response
 	{
-		return $this->connector->send(new CreateNewCustomerGroup($name, $id, $groupId, $createdAt, $updatedAt, $deletedAt, $version, $accept));
+		return $this->connector->send(new CreateCustomerGroup());
 	}
 
 
 	/**
-	 * @param string $customerGroupId
-	 * @param string $accept
+	 * @param string $customerGroupId The customer group id
 	 */
-	public function getSingleCustomerGroup(string $customerGroupId, ?string $accept = null): Response
+	public function getCustomerGroupById(string $customerGroupId): Response
 	{
-		return $this->connector->send(new GetSingleCustomerGroup($customerGroupId, $accept));
+		return $this->connector->send(new GetCustomerGroupById($customerGroupId));
 	}
 
 
 	/**
-	 * @param string $customerGroupId
-	 * @param mixed $name
-	 * @param mixed $id
-	 * @param mixed $groupId
-	 * @param mixed $createdAt
-	 * @param mixed $updatedAt
-	 * @param mixed $deletedAt
-	 * @param mixed $version
-	 * @param string $accept
+	 * @param string $customerGroupId The customer group id
 	 */
-	public function updateCustomerGroup(
+	public function updateCustomerGroup(string $customerGroupId): Response
+	{
+		return $this->connector->send(new UpdateCustomerGroup($customerGroupId));
+	}
+
+
+	/**
+	 * @param string $customerGroupId The customer group id
+	 */
+	public function deleteCustomerGroup(string $customerGroupId): Response
+	{
+		return $this->connector->send(new DeleteCustomerGroup($customerGroupId));
+	}
+
+
+	/**
+	 * @param string $customerGroupId The customer group id
+	 * @param int $after The lower limit for the version numbers to be included in the response.
+	 * @param int $before The upper limit for the version numbers to be included in the response.
+	 * @param int $pageSize The maximum number of items to be returned in the response.
+	 */
+	public function getCustomerGroupCustomers(
 		string $customerGroupId,
-		mixed $name = null,
-		mixed $id = null,
-		mixed $groupId = null,
-		mixed $createdAt = null,
-		mixed $updatedAt = null,
-		mixed $deletedAt = null,
-		mixed $version = null,
-		?string $accept = null,
+		?int $after = null,
+		?int $before = null,
+		?int $pageSize = null,
 	): Response
 	{
-		return $this->connector->send(new UpdateCustomerGroup($customerGroupId, $name, $id, $groupId, $createdAt, $updatedAt, $deletedAt, $version, $accept));
+		return $this->connector->send(new GetCustomerGroupCustomers($customerGroupId, $after, $before, $pageSize));
 	}
 
 
 	/**
-	 * @param string $customerGroupId
-	 * @param string $accept
+	 * @param string $customerGroupId The customer group id
 	 */
-	public function deleteCustomerGroup(string $customerGroupId, ?string $accept = null): Response
+	public function addCustomersToCustomerGroup(string $customerGroupId): Response
 	{
-		return $this->connector->send(new DeleteCustomerGroup($customerGroupId, $accept));
+		return $this->connector->send(new AddCustomersToCustomerGroup($customerGroupId));
 	}
 
 
 	/**
-	 * @param string $customerGroupId
-	 * @param string $accept
+	 * @param string $customerGroupId The customer group id
 	 */
-	public function getCustomersForCustomerGroup(string $customerGroupId, ?string $accept = null): Response
+	public function deleteCustomersFromCustomerGroup(string $customerGroupId): Response
 	{
-		return $this->connector->send(new GetCustomersForCustomerGroup($customerGroupId, $accept));
-	}
-
-
-	/**
-	 * @param string $customerGroupId
-	 * @param mixed $customerIds
-	 * @param string $accept
-	 */
-	public function addCustomerToCustomerGroup(
-		string $customerGroupId,
-		mixed $customerIds = null,
-		?string $accept = null,
-	): Response
-	{
-		return $this->connector->send(new AddCustomerToCustomerGroup($customerGroupId, $customerIds, $accept));
-	}
-
-
-	/**
-	 * @param string $customerGroupId
-	 * @param string $accept
-	 */
-	public function deleteCustomersFromCustomerGroup(string $customerGroupId, ?string $accept = null): Response
-	{
-		return $this->connector->send(new DeleteCustomersFromCustomerGroup($customerGroupId, $accept));
+		return $this->connector->send(new DeleteCustomersFromCustomerGroup($customerGroupId));
 	}
 }

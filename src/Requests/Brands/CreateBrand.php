@@ -9,7 +9,9 @@ use Saloon\Http\Request;
 use Saloon\Traits\Body\HasJsonBody;
 
 /**
- * Create brand
+ * CreateBrand
+ *
+ * Creates a new brand.
  */
 class CreateBrand extends Request implements HasBody
 {
@@ -20,27 +22,11 @@ class CreateBrand extends Request implements HasBody
 
 	public function resolveEndpoint(): string
 	{
-		return "/api/2.0/brands";
+		return "/brands";
 	}
 
 
-	/**
-	 * @param null|mixed $name
-	 */
-	public function __construct(
-		protected mixed $name = null,
-	) {
-	}
-
-
-	public function defaultBody(): array
+	public function __construct()
 	{
-		return array_filter(['name' => $this->name]);
-	}
-
-
-	public function defaultHeaders(): array
-	{
-		return array_filter([]);
 	}
 }

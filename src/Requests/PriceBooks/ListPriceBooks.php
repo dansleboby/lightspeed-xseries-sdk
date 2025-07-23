@@ -7,7 +7,17 @@ use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 /**
- * List price books
+ * ListPriceBooks
+ *
+ * **DEPRECATED** This endpoint has a 3.0 equivalent. We recommend using that instead.
+ *
+ * Returns a
+ * paginated list of price books.
+ *
+ * **Note**: In general you should avoid using price books unless the
+ * retailers' price books are already defined by an external system. The promotions API is the
+ * recommended way of providing custom pricing as it is rule based and more powerful, which reduces the
+ * amount of manual changes required compared to price books.
  */
 class ListPriceBooks extends Request
 {
@@ -16,47 +26,25 @@ class ListPriceBooks extends Request
 
 	public function resolveEndpoint(): string
 	{
-		return "/api/3.0/price_books";
+		return "/price_books";
 	}
 
 
 	/**
-	 * @param null|string $after (int64) The lower limit for the version numbers to be included in the response.
-	 * @param null|string $before (int64) The upper limit for the version numbers to be included in the response.
-	 * @param null|string $pageSize (integer) The maximum number of items to be returned in the response.
-	 * @param null|string $order (string) Field used to sort the results.
-	 * @param null|string $direction (string) Sort results direction. ASC or DESC.
-	 * @param null|string $deleted (boolean) Include (true) or exclude (false) deleted price books. Default value is false.
-	 * @param null|string $customerGroupId (stgring) Filter the list and show only price books linked to the specified Customer Group.
+	 * @param null|int $after The lower limit for the version numbers to be included in the response.
+	 * @param null|int $before The upper limit for the version numbers to be included in the response.
+	 * @param null|int $pageSize The maximum number of items to be returned in the response.
 	 */
 	public function __construct(
-		protected ?string $after = null,
-		protected ?string $before = null,
-		protected ?string $pageSize = null,
-		protected ?string $order = null,
-		protected ?string $direction = null,
-		protected ?string $deleted = null,
-		protected ?string $customerGroupId = null,
+		protected ?int $after = null,
+		protected ?int $before = null,
+		protected ?int $pageSize = null,
 	) {
 	}
 
 
 	public function defaultQuery(): array
 	{
-		return array_filter([
-			'after' => $this->after,
-			'before' => $this->before,
-			'page_size' => $this->pageSize,
-			'order' => $this->order,
-			'direction' => $this->direction,
-			'deleted' => $this->deleted,
-			'customer_group_id' => $this->customerGroupId,
-		]);
-	}
-
-
-	public function defaultHeaders(): array
-	{
-		return array_filter([]);
+		return array_filter(['after' => $this->after, 'before' => $this->before, 'page_size' => $this->pageSize]);
 	}
 }

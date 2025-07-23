@@ -7,7 +7,12 @@ use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 /**
- * Delete a price book
+ * DeletePriceBook
+ *
+ * Delete a price book by ID
+ *
+ * **Note**: The products associated with this price book will be
+ * automatically deleted when you delete the price book.
  */
 class DeletePriceBook extends Request
 {
@@ -16,21 +21,15 @@ class DeletePriceBook extends Request
 
 	public function resolveEndpoint(): string
 	{
-		return "/api/2.0/price_books/{$this->priceBookId}";
+		return "/price_books/{$this->priceBookId}";
 	}
 
 
 	/**
-	 * @param string $priceBookId
+	 * @param string $priceBookId Valid Price Book ID.
 	 */
 	public function __construct(
 		protected string $priceBookId,
 	) {
-	}
-
-
-	public function defaultHeaders(): array
-	{
-		return array_filter([]);
 	}
 }

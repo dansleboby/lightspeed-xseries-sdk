@@ -3,74 +3,75 @@
 namespace LightSpeed\XSeries;
 
 use LightSpeed\XSeries\Resource\Audit;
-use LightSpeed\XSeries\Resource\Authorization;
 use LightSpeed\XSeries\Resource\Brands;
 use LightSpeed\XSeries\Resource\ChannelRequestLog;
-use LightSpeed\XSeries\Resource\Consigments;
-use LightSpeed\XSeries\Resource\ConsigmentsProducts;
-use LightSpeed\XSeries\Resource\CustomFields;
+use LightSpeed\XSeries\Resource\ConsignmentProducts;
+use LightSpeed\XSeries\Resource\Consignments;
 use LightSpeed\XSeries\Resource\CustomerGroups;
 use LightSpeed\XSeries\Resource\Customers;
 use LightSpeed\XSeries\Resource\Fulfillment;
-use LightSpeed\XSeries\Resource\GiftCards;
 use LightSpeed\XSeries\Resource\Inventory;
 use LightSpeed\XSeries\Resource\OutletProductTaxes;
 use LightSpeed\XSeries\Resource\Outlets;
-use LightSpeed\XSeries\Resource\PartnerBilling;
 use LightSpeed\XSeries\Resource\PaymentTypes;
+use LightSpeed\XSeries\Resource\PickLists;
 use LightSpeed\XSeries\Resource\PriceBooks;
+use LightSpeed\XSeries\Resource\ProductCategories;
 use LightSpeed\XSeries\Resource\ProductImages;
 use LightSpeed\XSeries\Resource\ProductTypes;
 use LightSpeed\XSeries\Resource\Products;
-use LightSpeed\XSeries\Resource\PromoCodes;
+use LightSpeed\XSeries\Resource\PromoCode;
 use LightSpeed\XSeries\Resource\Promotions;
 use LightSpeed\XSeries\Resource\Quotes;
 use LightSpeed\XSeries\Resource\Registers;
-use LightSpeed\XSeries\Resource\RemoteRules;
 use LightSpeed\XSeries\Resource\Retailers;
-use LightSpeed\XSeries\Resource\Rules;
 use LightSpeed\XSeries\Resource\Sales;
 use LightSpeed\XSeries\Resource\Search;
 use LightSpeed\XSeries\Resource\SerialNumbers;
 use LightSpeed\XSeries\Resource\ServiceOrders;
-use LightSpeed\XSeries\Resource\StoreCredits;
+use LightSpeed\XSeries\Resource\Shifts;
 use LightSpeed\XSeries\Resource\Suppliers;
 use LightSpeed\XSeries\Resource\Tags;
 use LightSpeed\XSeries\Resource\Taxes;
 use LightSpeed\XSeries\Resource\Users;
 use LightSpeed\XSeries\Resource\VariantAttributes;
-use LightSpeed\XSeries\Resource\Webhooks;
-use Saloon\Http\Connector;
+use Saloon\Contracts\Authenticator;
 use Saloon\Http\Auth\TokenAuthenticator;
+use Saloon\Http\Connector;
 
 /**
- * X-Series API Collection
+ * API 2.0
+ *
+ * Early release of version 2.0 of the Lightspeed Retail (X-Series) API.
  */
 class XSeriesSdk extends Connector
 {
-    public function __construct(protected readonly string $baseUrl, protected readonly string $token) {
-        //
-    }
+	/**
+	 * @param string $domainPrefix Domain prefix of the store to be operated on
+	 * @param string $bearerToken
+	 */
+	public function __construct(
+		protected string $domainPrefix,
+		protected string $bearerToken,
+	) {
+	}
 
-    public function resolveBaseUrl(): string
-    {
-        return $this->baseUrl;
-    }
 
-	protected function defaultAuth(): TokenAuthenticator
-    {
-        return new TokenAuthenticator($this->token);
-    }
+	public function resolveBaseUrl(): string
+	{
+		return "https://{$this->domainPrefix}.retail.lightspeed.app/api/2.0";
+	}
+
+
+	public function defaultAuth(): Authenticator
+	{
+		return new TokenAuthenticator($this->bearerToken, "Bearer");
+	}
+
 
 	public function audit(): Audit
 	{
 		return new Audit($this);
-	}
-
-
-	public function authorization(): Authorization
-	{
-		return new Authorization($this);
 	}
 
 
@@ -86,21 +87,15 @@ class XSeriesSdk extends Connector
 	}
 
 
-	public function consigments(): Consigments
+	public function consignmentProducts(): ConsignmentProducts
 	{
-		return new Consigments($this);
+		return new ConsignmentProducts($this);
 	}
 
 
-	public function consigmentsProducts(): ConsigmentsProducts
+	public function consignments(): Consignments
 	{
-		return new ConsigmentsProducts($this);
-	}
-
-
-	public function customFields(): CustomFields
-	{
-		return new CustomFields($this);
+		return new Consignments($this);
 	}
 
 
@@ -122,12 +117,6 @@ class XSeriesSdk extends Connector
 	}
 
 
-	public function giftCards(): GiftCards
-	{
-		return new GiftCards($this);
-	}
-
-
 	public function inventory(): Inventory
 	{
 		return new Inventory($this);
@@ -146,21 +135,27 @@ class XSeriesSdk extends Connector
 	}
 
 
-	public function partnerBilling(): PartnerBilling
-	{
-		return new PartnerBilling($this);
-	}
-
-
 	public function paymentTypes(): PaymentTypes
 	{
 		return new PaymentTypes($this);
 	}
 
 
+	public function pickLists(): PickLists
+	{
+		return new PickLists($this);
+	}
+
+
 	public function priceBooks(): PriceBooks
 	{
 		return new PriceBooks($this);
+	}
+
+
+	public function productCategories(): ProductCategories
+	{
+		return new ProductCategories($this);
 	}
 
 
@@ -182,9 +177,9 @@ class XSeriesSdk extends Connector
 	}
 
 
-	public function promoCodes(): PromoCodes
+	public function promoCode(): PromoCode
 	{
-		return new PromoCodes($this);
+		return new PromoCode($this);
 	}
 
 
@@ -206,21 +201,9 @@ class XSeriesSdk extends Connector
 	}
 
 
-	public function remoteRules(): RemoteRules
-	{
-		return new RemoteRules($this);
-	}
-
-
 	public function retailers(): Retailers
 	{
 		return new Retailers($this);
-	}
-
-
-	public function rules(): Rules
-	{
-		return new Rules($this);
 	}
 
 
@@ -248,9 +231,9 @@ class XSeriesSdk extends Connector
 	}
 
 
-	public function storeCredits(): StoreCredits
+	public function shifts(): Shifts
 	{
-		return new StoreCredits($this);
+		return new Shifts($this);
 	}
 
 
@@ -281,11 +264,5 @@ class XSeriesSdk extends Connector
 	public function variantAttributes(): VariantAttributes
 	{
 		return new VariantAttributes($this);
-	}
-
-
-	public function webhooks(): Webhooks
-	{
-		return new Webhooks($this);
 	}
 }

@@ -9,18 +9,12 @@ use Saloon\Http\Response;
 class PaymentTypes extends BaseResource
 {
 	/**
-	 * @param string $after (int64) The lower limit for the version numbers to be included in the response.
-	 * @param string $before (int64) The upper limit for the version numbers to be included in the response.
-	 * @param string $pageSize (integer) The maximum number of items to be returned in the response.
-	 * @param string $accept
+	 * @param int $after The lower limit for the version numbers to be included in the response.
+	 * @param int $before The upper limit for the version numbers to be included in the response.
+	 * @param int $pageSize The maximum number of items to be returned in the response.
 	 */
-	public function listPaymentTypes(
-		?string $after = null,
-		?string $before = null,
-		?string $pageSize = null,
-		?string $accept = null,
-	): Response
+	public function listPaymentTypes(?int $after = null, ?int $before = null, ?int $pageSize = null): Response
 	{
-		return $this->connector->send(new ListPaymentTypes($after, $before, $pageSize, $accept));
+		return $this->connector->send(new ListPaymentTypes($after, $before, $pageSize));
 	}
 }

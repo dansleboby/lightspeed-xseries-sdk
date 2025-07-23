@@ -7,7 +7,9 @@ use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
 /**
- * Set image position
+ * SetImagePosition
+ *
+ * Allows for changing the image position in the list
  */
 class SetImagePosition extends Request
 {
@@ -16,29 +18,15 @@ class SetImagePosition extends Request
 
 	public function resolveEndpoint(): string
 	{
-		return "/api/2.0/product_images/{$this->productImageId}";
+		return "/product_images/{$this->productImageId}";
 	}
 
 
 	/**
-	 * @param string $productImageId
-	 * @param null|mixed $position
+	 * @param string $productImageId The product image id
 	 */
 	public function __construct(
 		protected string $productImageId,
-		protected mixed $position = null,
 	) {
-	}
-
-
-	public function defaultBody(): array
-	{
-		return array_filter(['position' => $this->position]);
-	}
-
-
-	public function defaultHeaders(): array
-	{
-		return array_filter([]);
 	}
 }
